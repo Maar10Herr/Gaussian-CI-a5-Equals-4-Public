@@ -99,7 +99,7 @@ flowchart LR
 
 ## Self-contained catalogue reconstruction
 
-Earlier internal builds consumed the published four-gaussoid catalogue as a
+Previous implementations consumed the published four-gaussoid catalogue as a
 data file. This public release instead reconstructs it from the elementary
 gaussoid axioms with a deterministic standard-library DPLL enumerator. The
 generated 679-row catalogue and its 629-row regular-Gaussian subset reproduce
