@@ -1,0 +1,43 @@
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[project]
+name = "five-gaussian-ci"
+version = "0.3.0"
+description = "Exact verification of the five-variable Gaussian CI antecedent threshold"
+requires-python = ">=3.12"
+readme = "README.md"
+license = {text = "GPL-3.0-or-later"}
+authors = [
+  {name = "Maarten Linus Herrmann"},
+]
+keywords = [
+  "Gaussian conditional independence",
+  "gaussoids",
+  "Horn implications",
+  "exact verification",
+  "interval arithmetic",
+]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
+  "Topic :: Scientific/Engineering :: Mathematics",
+]
+dependencies = ["sympy==1.14.0", "z3-solver==4.15.3.0"]
+
+[project.optional-dependencies]
+test = ["hypothesis>=6.100", "pytest>=8.0"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/five_gaussian_ci"]
+
+[project.urls]
+Homepage = "https://github.com/Maar10Herr/Gaussian-CI-a5-Equals-4-Public"
+Paper = "https://github.com/Maar10Herr/Gaussian-CI-a5-Equals-4-Public/blob/main/paper/Herrmann_Antecedent_Threshold_Gaussian_CI.pdf"
+Issues = "https://github.com/Maar10Herr/Gaussian-CI-a5-Equals-4-Public/issues"
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+addopts = "-ra"
