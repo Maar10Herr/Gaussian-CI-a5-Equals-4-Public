@@ -1,0 +1,24 @@
+{
+  "release": "0.3.0",
+  "pytest_passed": 14,
+  "atom_counts_n1_to_n5": [0, 1, 6, 24, 80],
+  "regular_gaussian_structure_counts_n1_to_n4": [1, 2, 11, 629],
+  "antecedent_complexity_threshold_a5": 4,
+  "four_variable_gaussoids": 679,
+  "regular_gaussian_four_variable_structures": 629,
+  "t4_excluded": 50,
+  "m3_labelled_premises": 82160,
+  "m3_premise_orbits": 439,
+  "m3_canonical_representatives_with_full_support": 335,
+  "m3_mixed_support_orbits": 105,
+  "m3_rule_orbits": 21357,
+  "m3_nonlocal_rule_orbits": 21167,
+  "m3_interval_certificates": 364,
+  "m3_second_branch_orbits": 29,
+  "cycle_rule": {
+    "premise_indices": [1, 10, 20, 25],
+    "conclusion_index": 0,
+    "t4_faces_checked": 10,
+    "gaussoid_axioms_checked": true
+  }
+}

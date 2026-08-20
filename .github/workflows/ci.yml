@@ -1,0 +1,26 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: Exact theorem and package
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: astral-sh/setup-uv@v10.0.1
+        with:
+          enable-cache: true
+      - name: Reconstruct catalogues and verify exact certificates
+        run: make verify-core
+      - name: Install locked development dependencies
+        run: uv sync --frozen --all-extras
+      - name: Run development tests
+        run: uv run pytest -q
+      - name: Build wheel and source distribution
+        run: uv build
