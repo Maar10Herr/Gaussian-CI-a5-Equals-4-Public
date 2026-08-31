@@ -38,6 +38,6 @@ Paper = "https://github.com/Maar10Herr/Gaussian-CI-a5-Equals-4-Public/blob/main/
 Issues = "https://github.com/Maar10Herr/Gaussian-CI-a5-Equals-4-Public/issues"
 
 [tool.pytest.ini_options]
-pythonpath = ["src"]
+pythonpath = ["src", "."]
 testpaths = ["tests"]
 addopts = "-ra"

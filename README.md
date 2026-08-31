@@ -10,9 +10,9 @@ five-variable regular-Gaussian conditional-independence inference.
 > [!NOTE]
 > **Computer-assisted theorem with independently replayable exact
 > certificates.** The result concerns elementary, singleton-conclusion Horn
-> implications for regular positive-definite Gaussians. It does not classify
-> every four-antecedent implication or every five-variable Gaussian CI
-> structure.
+> implications for regular positive-definite Gaussians. Classification of all
+> four-antecedent implications and all five-variable Gaussian CI structures is
+> outside its scope.
 
 **[Read the paper](paper/Herrmann_Antecedent_Threshold_Gaussian_CI.pdf)** ·
 **[Inspect the certificates](certificates/)** ·
@@ -99,8 +99,7 @@ flowchart LR
 
 ## Self-contained catalogue reconstruction
 
-Previous implementations consumed the published four-gaussoid catalogue as a
-data file. This public release instead reconstructs it from the elementary
+The release reconstructs the four-gaussoid catalogue from the elementary
 gaussoid axioms with a deterministic standard-library DPLL enumerator. The
 generated 679-row catalogue and its 629-row regular-Gaussian subset reproduce
 the published byte-level SHA-256 values.
