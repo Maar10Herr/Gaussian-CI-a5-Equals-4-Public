@@ -4,10 +4,10 @@ COREPY := env PYTHONNOUSERSITE=1 $(PYTHON) -I
 .PHONY: test baselines catalogue materialize-catalogue m3 cycle corruptions manifest verify-core verify build clean
 
 test:
-	uv run pytest -q
+	uv run --frozen --extra test pytest -q
 
 baselines:
-	uv run python tools/reproduce_small_n.py
+	uv run --frozen python tools/reproduce_small_n.py
 
 catalogue:
 	$(COREPY) independent/verify_t4.py

@@ -23,12 +23,21 @@ def included(path: Path) -> bool:
     return relative.as_posix() not in GENERATED_CATALOGUE
 
 
-paths = sorted(
-    path for path in ROOT.rglob("*") if path.is_file() and included(path)
-)
+paths = []
+for path in ROOT.rglob("*"):
+    relative = path.relative_to(ROOT)
+    if any(part in SKIP_DIRS for part in relative.parts):
+        continue
+    if path.is_symlink():
+        raise SystemExit(f"refusing to hash symbolic link: {relative}")
+    if path.is_file() and included(path):
+        paths.append(path)
+paths.sort()
 lines = [
     f"{sha256(path.read_bytes()).hexdigest()}  {path.relative_to(ROOT).as_posix()}"
     for path in paths
 ]
-(ROOT / "MANIFEST.sha256").write_text("\n".join(lines) + "\n")
+(ROOT / "MANIFEST.sha256").write_text(
+    "\n".join(lines) + "\n", encoding="utf-8"
+)
 print(f"manifest_written entries={len(lines)}")
