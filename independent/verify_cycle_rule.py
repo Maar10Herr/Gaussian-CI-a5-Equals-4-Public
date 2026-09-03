@@ -5,6 +5,9 @@ from pathlib import Path
 import runpy
 R=Path(__file__).parents[1]
 # Sparse integer polynomials in (a,b,c,d,p,q,r,s).
+if not __debug__:
+    raise SystemExit("verification requires assertions; run Python without -O")
+
 def C(n):return {(0,)*8:n} if n else {}
 def V(i):
  e=[0]*8;e[i]=1;return {tuple(e):1}
@@ -22,6 +25,7 @@ def mul(p,q):
  return {m:c for m,c in out.items() if c}
 a,b,c,d,p,q,r,s=map(V,range(8))
 f1=add(a,neg(mul(b,p)));f2=add(b,neg(mul(c,q)));f3=add(c,neg(mul(d,r)));f4=add(d,neg(mul(a,s)))
+
 lhs=add(f1,mul(p,f2),mul(mul(p,q),f3),mul(mul(mul(p,q),r),f4))
 rhs=add(a,neg(mul(mul(mul(mul(a,p),q),r),s)))
 assert lhs==rhs

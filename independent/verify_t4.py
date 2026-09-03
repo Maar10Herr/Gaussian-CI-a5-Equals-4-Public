@@ -5,6 +5,9 @@ from hashlib import sha256
 from pathlib import Path
 import runpy
 
+if not __debug__:
+    raise SystemExit("verification requires assertions; run Python without -O")
+
 ROOT = Path(__file__).parents[1]
 catalogue = runpy.run_path(ROOT / "independent/catalogue.py")
 gaussoids, regular, excluded = catalogue["build_catalogues"]()

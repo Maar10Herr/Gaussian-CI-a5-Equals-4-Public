@@ -1,5 +1,6 @@
 from pathlib import Path
 import runpy
+import pytest
 from five_gaussian_ci.atoms import atoms
 from five_gaussian_ci.orbits import *
 from five_gaussian_ci.local_theory import T4MinorTheory,T4ArcTheory
@@ -22,3 +23,11 @@ def test_t4_minor_theory_obvious_consequences(tmp_path):
  c=idx[Atom(1,2)]
  assert c in T.consequences(P)
  assert T.consequences(P)==T4ArcTheory(catalogue).consequences(P)
+
+def test_t4_theories_reject_malformed_catalogues(tmp_path):
+ malformed=tmp_path/'malformed.txt'
+ malformed.write_text(('0'*24+'\n')*629)
+ with pytest.raises(ValueError):
+  T4ArcTheory(malformed)
+ with pytest.raises(ValueError):
+  T4MinorTheory(malformed)

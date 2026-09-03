@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
 """Exact small-n baseline reproducer."""
+
+if not __debug__:
+    raise SystemExit("reproduction requires assertions; run Python without -O")
+
 from pathlib import Path
 import runpy
 from five_gaussian_ci.atoms import atoms

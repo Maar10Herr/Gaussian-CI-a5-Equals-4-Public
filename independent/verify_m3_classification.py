@@ -8,6 +8,10 @@ from fractions import Fraction as F
 from itertools import combinations,permutations
 from pathlib import Path
 import json,runpy,sys
+
+if not __debug__:
+ raise SystemExit("verification requires assertions; run Python without -O")
+
 R=Path(__file__).parents[1]
 CATALOGUE=runpy.run_path(R/'independent/catalogue.py')['build_catalogues']
 EDGES=tuple((i,j) for i in range(5) for j in range(i+1,5))
