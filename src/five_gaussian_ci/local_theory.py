@@ -1,12 +1,23 @@
 """Exact finite T4-minor theory on five labels via Z3 bit-vectors."""
 from pathlib import Path
-from .atoms import Atom,atoms,atom_index
+from .atoms import Atom, atoms, atom_index
+
+
+def _load_t4_rows(t4_path):
+    rows = Path(t4_path).read_text(encoding="ascii").splitlines()
+    if len(rows) != 629 or any(
+        len(row) != 24 or set(row) - {"0", "1"} for row in rows
+    ):
+        raise ValueError("T4 catalogue must contain 629 binary 24-bit rows")
+    if len(set(rows)) != len(rows):
+        raise ValueError("T4 catalogue rows must be unique")
+    return rows
 
 class T4ArcTheory:
     """Iterated exact closure by the ten marginal/conditional four-faces."""
     def __init__(self,t4_path):
         self.U=(1,2,3,4,5); self.A=atoms(self.U); self.idx=atom_index(self.U)
-        rows=Path(t4_path).read_text().splitlines(); assert len(rows)==629
+        rows=_load_t4_rows(t4_path)
         self.masks=tuple(sum((b=='0')<<i for i,b in enumerate(row)) for row in rows)
         self.face_maps=[]
         for omitted in self.U:
@@ -31,8 +42,7 @@ class T4MinorTheory:
     def __init__(self,t4_path):
         from z3 import BitVec,BitVecVal,Concat,Extract,Or,Solver
         self.U=(1,2,3,4,5); self.A=atoms(self.U); self.idx=atom_index(self.U)
-        rows=Path(t4_path).read_text().splitlines()
-        assert len(rows)==629
+        rows=_load_t4_rows(t4_path)
         masks=[]
         for row in rows:
             m=sum((b=='0')<<i for i,b in enumerate(row)); masks.append(m)

@@ -10,7 +10,8 @@ def symmetry_maps(universe, include_duality=True):
         out.append(base)
         if include_duality:
             out.append(tuple(idx[a.permute(mp).dual(U)] for a in A))
-    assert len(set(out))==len(out)
+    if len(set(out)) != len(out):
+        raise ValueError("symmetry action produced duplicate permutations")
     return tuple(out)
 
 def image(indices, mapping): return tuple(sorted(mapping[i] for i in indices))

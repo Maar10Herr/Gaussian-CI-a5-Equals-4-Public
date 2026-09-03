@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
 """Dependency-free deliberate-corruption checks for exact proof objects."""
+
+if not __debug__:
+    raise SystemExit("verification requires assertions; run Python without -O")
+
 from pathlib import Path
 import copy,hashlib,importlib.util,json
 R=Path(__file__).parents[1]
