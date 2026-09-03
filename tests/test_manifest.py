@@ -45,7 +45,12 @@ class ManifestVerifierTests(unittest.TestCase):
 
     def test_unsafe_paths_are_rejected(self) -> None:
         digest = "0" * 64
-        for path in ("../outside.txt", "/etc/passwd", ".git/config"):
+        for path in (
+            "../outside.txt",
+            "/etc/passwd",
+            ".git/config",
+            ".uv-cache/metadata",
+        ):
             with self.assertRaises(AssertionError):
                 self._run_manifest(f"{digest}  {path}\n")
 

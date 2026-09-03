@@ -5,7 +5,16 @@ from hashlib import sha256
 from pathlib import Path
 
 ROOT = Path(__file__).parents[1]
-SKIP_DIRS = {".git", ".venv", ".pytest_cache", ".hypothesis", "build", "dist", "__pycache__"}
+SKIP_DIRS = {
+    ".git",
+    ".venv",
+    ".uv-cache",
+    ".pytest_cache",
+    ".hypothesis",
+    "build",
+    "dist",
+    "__pycache__",
+}
 SKIP_FILES = {"MANIFEST.sha256", ".DS_Store"}
 GENERATED_CATALOGUE = {
     "data/canonical/G4_bitstrings.txt",

@@ -13,6 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SKIP_DIRS = {
     ".git",
     ".venv",
+    ".uv-cache",
     ".pytest_cache",
     ".hypothesis",
     "build",
