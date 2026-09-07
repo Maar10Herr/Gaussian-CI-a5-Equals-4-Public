@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.1 — 2026-09-07
+
+- Harden manifest parsing against path traversal, symbolic links, malformed
+  digests, duplicate entries, and unlisted release files.
+- Make locked test execution explicit and refresh Z3 and Hypothesis.
+
 ## 0.3.0 — 2026-08-20
 
 - Publish the version-0.3 preprint and exact certificate set.

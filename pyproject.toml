@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "five-gaussian-ci"
-version = "0.3.0"
+version = "0.3.1"
 description = "Exact verification of the five-variable Gaussian CI antecedent threshold"
 requires-python = ">=3.12"
 readme = "README.md"

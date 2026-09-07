@@ -1,6 +1,6 @@
 {
-  "release": "0.3.0",
-  "pytest_passed": 14,
+  "release": "0.3.1",
+  "pytest_passed": 25,
   "atom_counts_n1_to_n5": [0, 1, 6, 24, 80],
   "regular_gaussian_structure_counts_n1_to_n4": [1, 2, 11, 629],
   "antecedent_complexity_threshold_a5": 4,
