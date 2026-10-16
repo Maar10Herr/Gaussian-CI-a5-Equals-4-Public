@@ -1,7 +1,7 @@
 PYTHON := python3
 COREPY := env PYTHONNOUSERSITE=1 $(PYTHON) -I
 
-.PHONY: test baselines catalogue materialize-catalogue m3 cycle corruptions manifest verify-core verify build clean
+.PHONY: test baselines catalogue materialize-catalogue m3 cycle corruptions manifest verify-core verify-lean verify build clean
 
 test:
 	uv run --frozen --extra test pytest -q
@@ -30,6 +30,9 @@ manifest:
 verify-core: catalogue m3 cycle corruptions manifest
 
 verify: test baselines verify-core
+
+verify-lean:
+	formalization/check.sh
 
 build:
 	uv build

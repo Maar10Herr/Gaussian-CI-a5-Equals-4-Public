@@ -1,5 +1,16 @@
 # Changelog
 
+## Partial Lean formalization
+
+- Add proofs for the four-premise matrix implication, exact rational
+  counterexamples and premise minimality, ten realizable countermodel faces,
+  interval evaluation, polynomial differentiation, and analytic root-existence
+  lemmas. The complete threshold theorem remains unformalized.
+- Pin Lean and mathlib; audit theorem axiom dependencies. Project checks run
+  sequentially with one Lean thread and a 2048 MB limit per proof process.
+- Exclude local Lean caches from release manifests and test that boundary.
+  The paper and Python mathematical verifier are unchanged by this addition.
+
 ## Manuscript 0.4 — 2026-10-16
 
 - Publish the concise arXiv manuscript, editable LaTeX, bibliography, and a

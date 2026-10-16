@@ -22,3 +22,9 @@ integrity identifiers. The upstream supplemental-material page is
 
 Runtime dependencies are installed from their respective package indexes and
 are not vendored. Their licences remain with their authors.
+
+The optional partial formalization pins Lean 4.35.0 and mathlib revision
+`56a005855ea17e0b0958f73ec801ae140b0a1679`. Both are external Apache-2.0
+dependencies; their sources and compiled caches are not redistributed here.
+The formalization's generated finite data come from this repository's
+axiom-based enumerator and countermodel.

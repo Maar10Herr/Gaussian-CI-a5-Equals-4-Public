@@ -50,6 +50,7 @@ class ManifestVerifierTests(unittest.TestCase):
             "/etc/passwd",
             ".git/config",
             ".uv-cache/metadata",
+            "formalization/.lake/packages/mathlib/lean-toolchain",
         ):
             with self.assertRaises(AssertionError):
                 self._run_manifest(f"{digest}  {path}\n")
@@ -77,6 +78,19 @@ class ManifestVerifierTests(unittest.TestCase):
             self._run_manifest("malformed\n")
         with self.assertRaises(AssertionError):
             self._run_manifest(f"{'x' * 64}  missing.txt\n")
+
+    def test_lean_cache_symlinks_are_not_release_files(self) -> None:
+        with tempfile.TemporaryDirectory(prefix="gaussian-manifest-test-") as temporary:
+            root = Path(temporary)
+            packages = root / "formalization" / ".lake" / "packages"
+            packages.mkdir(parents=True)
+            (packages / "mathlib").symlink_to("/unavailable-mathlib", target_is_directory=True)
+            previous_root = verify_manifest.ROOT
+            verify_manifest.ROOT = root
+            try:
+                self.assertEqual(verify_manifest._release_files(), set())
+            finally:
+                verify_manifest.ROOT = previous_root
 
 
 if __name__ == "__main__":

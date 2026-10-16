@@ -10,6 +10,7 @@
 *.blg
 /build/
 /dist/
+.lake/
 /data/canonical/G4_bitstrings.txt
 /data/canonical/T4_bitstrings.txt
 /data/canonical/T4_excluded_nonrealizable.txt

@@ -43,6 +43,16 @@ three-antecedent premise set under label permutations and duality and supplies
 exact rational interval certificates for Gaussian counterexamples to every
 conclusion outside the four-local closure.
 
+## Partial Lean formalization
+
+[`formalization/README.md`](formalization/README.md) describes kernel-checked
+matrix implications, exact counterexamples, and analytic verification lemmas.
+**The full theorem `a5 = 4` is not yet proved in Lean.** Python and the existing
+certificates remain the complete verification path. The Lean project pins its
+dependencies, checks axiom dependencies, and requests one thread and 2048 MB per
+proof process; `make verify-lean` builds project modules sequentially after the
+mathlib cache is available.
+
 ## Verify the theorem
 
 The complete mathematical verification uses only the Python standard library:

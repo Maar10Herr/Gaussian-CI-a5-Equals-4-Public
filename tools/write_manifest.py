@@ -11,6 +11,7 @@ SKIP_DIRS = {
     ".uv-cache",
     ".pytest_cache",
     ".hypothesis",
+    ".lake",
     "build",
     "dist",
     "__pycache__",
