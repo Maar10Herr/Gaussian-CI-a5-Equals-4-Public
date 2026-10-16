@@ -39,8 +39,8 @@ The upper bound uses the five-variable member of Šimeček's implication family,
 
 and an explicit 80-atom `T4` countermodel. The lower bound classifies every
 three-antecedent premise set under label permutations and duality and supplies
-exact rational Gaussian counterexamples for every conclusion outside the
-four-local closure.
+exact rational interval certificates for Gaussian counterexamples to every
+conclusion outside the four-local closure.
 
 ## Verify the theorem
 
@@ -65,6 +65,33 @@ cycle_rule_ok identity=exact gaussoid_axioms=ok t4_faces=10 premise=[1,10,20,25]
 corruption_checks_ok cases=4
 manifest_ok entries=<release-specific count>
 ```
+
+The legacy output key `nonlocal=21167` counts rule orbits outside the computed
+`T4` closure. Each is refuted by a certified positive-definite Gaussian
+witness; these are not genuinely nonlocal valid implications. The manifest
+entry count depends on the release contents and is not a mathematical count.
+
+The component checks can also be run separately from the repository root:
+
+```sh
+env PYTHONNOUSERSITE=1 python3 -I independent/verify_t4.py
+env PYTHONNOUSERSITE=1 python3 -I independent/verify_m3_classification.py
+env PYTHONNOUSERSITE=1 python3 -I independent/verify_cycle_rule.py
+env PYTHONNOUSERSITE=1 python3 -I independent/verify_corruptions.py
+env PYTHONNOUSERSITE=1 python3 -I tools/verify_manifest.py
+```
+
+Run Python without `-O`: the mathematical verifiers explicitly reject
+execution with assertions disabled. The `-I` flag isolates these commands
+from user-site packages and Python environment settings.
+
+The deliberate-corruption checks reject a zero Krawczyk preconditioner,
+a countermodel with the conclusion made present, and an internal countermodel
+bit flip detected through the axiom or face checks. The fourth check confirms
+that appending bytes to the countermodel changes its pinned SHA-256 digest.
+These tests exercise rejection paths; the mathematical evidence consists of
+the accepted exact identities, countermodel, interval certificates, and
+exhaustive coverage checks.
 
 For the development tests and package build:
 
@@ -118,9 +145,9 @@ axioms, enumeration, higher-rule filter, and pinned digests in
 | Premise orbits under `S5 × duality` | 439 |
 | Full-support canonical representatives | 335 |
 | Rule orbits in the certified stratum | 21,357 |
-| Nonlocal rule orbits requiring witnesses | 21,167 |
+| Rule orbits outside the computed `T4` closure | 21,167 |
 | Rational interval certificates | 364 |
-| Representatives requiring a second branch | 29 |
+| Representatives using two certified boxes | 29 |
 
 Each certificate fixes seven rational correlations, encloses three remaining
 coordinates in rational boxes, and supplies a nonsingular rational Krawczyk
@@ -181,7 +208,7 @@ lower-bound computation, and exact replayable certificates.
 ## Repository map
 
 ```text
-paper/          version-0.3 preprint
+paper/          mathematical preprint
 src/            Python research library
 independent/    standard-library catalogue and theorem verifiers
 certificates/   accepted exact proof objects
