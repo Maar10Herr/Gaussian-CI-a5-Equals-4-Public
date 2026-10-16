@@ -16,7 +16,8 @@ five-variable regular-Gaussian conditional-independence inference.
 
 **[Read the paper](paper/Herrmann_Antecedent_Threshold_Gaussian_CI.pdf)** ·
 **[Inspect the certificates](certificates/)** ·
-**[Download the latest release](https://github.com/Maar10Herr/Gaussian-CI-a5-Equals-4-Public/releases/latest)**
+**[Download TeX source](paper/gaussian-ci-a5-v0.4-arxiv-source.tar.gz)** ·
+**[Download verifier v0.3.1](https://github.com/Maar10Herr/Gaussian-CI-a5-Equals-4-Public/releases/tag/v0.3.1)**
 
 ## Result
 

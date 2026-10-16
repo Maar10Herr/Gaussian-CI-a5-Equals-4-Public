@@ -1,0 +1,71 @@
+\begin{thebibliography}{10}
+
+\bibitem{BoegeCorrection2022}
+Tobias Boege.
+\newblock Correction to: Gaussoids are two-antecedental approximations of
+  {Gaussian} conditional independence structures.
+\newblock {\em Annals of Mathematics and Artificial Intelligence},
+  90(6):675--676, 2022.
+
+\bibitem{Boege2022}
+Tobias Boege.
+\newblock Gaussoids are two-antecedental approximations of {Gaussian}
+  conditional independence structures.
+\newblock {\em Annals of Mathematics and Artificial Intelligence},
+  90(6):645--673, 2022.
+
+\bibitem{BoegeSA2023}
+Tobias Boege.
+\newblock Selfadhesivity in {Gaussian} conditional independence structures.
+\newblock {\em International Journal of Approximate Reasoning}, 163:109027,
+  2023.
+
+\bibitem{Geometry2019}
+Tobias Boege, Alessio D'Al\`i, Thomas Kahle, and Bernd Sturmfels.
+\newblock The geometry of gaussoids.
+\newblock {\em Foundations of Computational Mathematics}, 19:775--812, 2019.
+
+\bibitem{Construction2020}
+Tobias Boege and Thomas Kahle.
+\newblock Construction methods for gaussoids.
+\newblock {\em Kybernetika}, 56(6):1045--1062, 2020.
+
+\bibitem{Krawczyk1969}
+Rudolf Krawczyk.
+\newblock {Newton-Algorithmen} zur {Bestimmung} von {Nullstellen} mit
+  {Fehlerschranken}.
+\newblock {\em Computing}, 4:187--201, 1969.
+
+\bibitem{LM2007}
+Radim Ln\v{e}ni\v{c}ka and Franti\v{s}ek Mat\'u\v{s}.
+\newblock On {Gaussian} conditional independence structures.
+\newblock {\em Kybernetika}, 43(3):327--342, 2007.
+
+\bibitem{Matus2005}
+Franti\v{s}ek Mat\'u\v{s}.
+\newblock Conditional independences in {Gaussian} vectors and rings of
+  polynomials.
+\newblock In {\em Conditionals, Information, and Inference}, volume 3301 of
+  {\em Lecture Notes in Computer Science}, pages 152--161. Springer, 2005.
+
+\bibitem{Rump2010}
+Siegfried~M. Rump.
+\newblock Verification methods: Rigorous results using floating-point
+  arithmetic.
+\newblock {\em Acta Numerica}, 19:287--449, 2010.
+
+\bibitem{Sullivant2009}
+Seth Sullivant.
+\newblock {Gaussian} conditional independence relations have no finite complete
+  characterization.
+\newblock {\em Journal of Pure and Applied Algebra}, 213(8):1502--1506, 2009.
+
+\bibitem{Simecek2006}
+Petr \v{S}ime\v{c}ek.
+\newblock Classes of {Gaussian}, discrete and binary representable independence
+  models have no finite characterization.
+\newblock In M.~Hu\v{s}kov\'a and M.~Jan\v{z}ura, editors, {\em Proceedings of
+  Prague Stochastics}, volume 400, pages 622--631, Prague, 2006. Matfyzpress,
+  Charles University.
+
+\end{thebibliography}
