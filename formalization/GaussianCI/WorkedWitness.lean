@@ -77,7 +77,7 @@ theorem posDef_of_diagonal_dominance {n : Type*} [Fintype n] [DecidableEq n]
   have hupper := (abs_le.mp hk).2
   linarith [hrow k]
 
-/-- The matrix is genuinely positive definite over the reals. -/
+/-- The matrix is positive definite over the reals. -/
 theorem workedWitness_posDef : workedWitness.PosDef :=
   posDef_of_diagonal_dominance workedWitness_isHermitian
     workedWitness_diagonal workedWitness_row_sum_lt_one

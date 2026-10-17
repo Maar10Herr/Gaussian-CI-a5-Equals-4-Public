@@ -1,5 +1,16 @@
 # Changelog
 
+## Documentation wording — 2026-10-17
+
+- State the theorem's scope, verification components, and prior work in direct
+  terms. Remove repeated summary language. Mathematical claims and verification
+  instructions are unchanged.
+- Define CI notation in the abstract, correct the 24-atom face-order wording,
+  and describe certificate conditions mathematically. Refresh the PDF and
+  arXiv source archive.
+- Simplify formalization documentation and comments; Lean proof code and
+  mathematical statements are unchanged.
+
 ## Manuscript 0.4 clarifications — 2026-10-17
 
 - Clarify marginal-independence notation, atom indices, and the zero-based
@@ -25,7 +36,7 @@
 
 ## Manuscript 0.4 — 2026-10-16
 
-- Publish the concise arXiv manuscript, editable LaTeX, bibliography, and a
+- Publish the arXiv manuscript, editable LaTeX, bibliography, and a
   three-file submission archive. The verification implementation and exact
   certificates are unchanged from software release 0.3.1.
 - Correct closure-external rule terminology and state the exhaustive-witness

@@ -9,9 +9,9 @@ matrices; a probability-library equivalence with Gaussian CI is not developed.
 ## Established components
 
 - `Cycle.lean` proves the four-premise implication for arbitrary real
-  positive-definite five-variable covariance matrices, using actual
-  almost-principal minors. Correlation bounds, diagonal rescaling, and
-  normalization are proved rather than assumed.
+  positive-definite five-variable covariance matrices, using almost-principal
+  minors. The proof includes correlation bounds, diagonal rescaling, and
+  normalization.
 - `WorkedWitness.lean` gives a concrete positive-definite rational correlation
   matrix satisfying the three canonical premises and refuting their marginal
   conclusion. Its seven fixed fractions come from certificate 272; the other
@@ -31,10 +31,10 @@ matrices; a probability-library equivalence with Gaussian CI is not developed.
 - `Interval.lean` proves real enclosure soundness of rational interval
   arithmetic, polynomial evaluation, and determinant evaluation.
 - `PolynomialDerivative.lean` proves symbolic differentiation and interval
-  bounds for the actual derivatives of real polynomial systems.
-- `Krawczyk.lean` proves a genuine existence-and-uniqueness criterion by Banach
-  contraction, with derivative and midpoint-residual bounds. The full bridge
-  from the repository's componentwise interval test remains to be completed.
+  bounds for the Fréchet derivatives of real polynomial systems.
+- `Krawczyk.lean` proves an existence-and-uniqueness criterion by Banach
+  contraction, with derivative and midpoint-residual bounds. The repository's
+  componentwise interval test has not yet been shown to satisfy this criterion.
 - `Coverage.lean` proves the logical coverage and threshold assembly lemmas.
   These are conditional theorems: their Gaussian and certificate hypotheses
   have not been discharged for the entire dataset.
@@ -73,20 +73,17 @@ The memory setting is Lean's own limit, not a system-wide cap.
 
 ## Remaining proof obligations
 
-See [OBLIGATIONS.md](OBLIGATIONS.md). The largest missing links are complete
-catalogue/closure soundness, real-matrix symmetry and duality, the proper-support
-extension, and the certificate-to-Gaussian bridge for all 364 records with
-exhaustive representative coverage. The existence of a generic assembly theorem
-does not discharge any of these inputs.
-
-No part of the Python acceptance path is removed on the strength of these
-partial results. The manuscript remains a computer-assisted mathematical paper,
-not a claim of a completed Lean formalization.
+See [OBLIGATIONS.md](OBLIGATIONS.md). Remaining obligations include complete
+catalogue and closure soundness, real-matrix symmetry and duality, the
+proper-support extension, and a proof that all 364 certificate records produce
+Gaussian counterexamples with exhaustive representative coverage. The generic
+assembly theorem takes these statements as hypotheses.
 
 ## Licence and provenance
 
-Original formalization code follows the repository's GPL-3.0-or-later licence.
+Original formalization code is distributed under GPL-3.0-or-later in the
+[public release](https://github.com/Maar10Herr/Gaussian-CI-a5-Equals-4-Public/blob/main/LICENSE).
 Lean and mathlib are external Apache-2.0 dependencies. Generated finite data
 come from this repository's axiom-based catalogue builder and public
-countermodel, not a copied third-party catalogue. The source and toolchain pins
-make it possible to inspect both the formal statements and their dependencies.
+countermodel. The source and toolchain pins record the formal statements and
+their dependencies.

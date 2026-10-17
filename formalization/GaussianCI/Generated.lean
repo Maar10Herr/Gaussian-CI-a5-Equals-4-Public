@@ -12,7 +12,7 @@ below are accepted by Lean kernel reduction, independently of Python execution.
 The theorems establish supplied row counts, 24-bit bounds, agreement with the
 countermodel mask, and membership of its ten faces. Row validity, distinctness,
 exhaustive enumeration, Gaussian realizability, and the four-variable
-classification are not proved here. The countermodel's actual axioms and
+classification are not proved here. The countermodel's axioms and
 Gaussian face realizations are checked separately in `Finite.lean` and
 `FaceWitnesses.lean`; they do not depend on these catalogue data.
 -/

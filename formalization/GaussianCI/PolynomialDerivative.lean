@@ -10,8 +10,8 @@ public import Mathlib.Analysis.Calculus.FDeriv.Prod
 
 Symbolic partial differentiation of the rational polynomial expression language
 is connected to the real Fréchet derivative. Evaluating the differentiated
-expressions on rational intervals therefore encloses each entry of the actual
-Jacobian on the box.
+expressions on rational intervals therefore encloses each entry of the Jacobian
+on the box.
 
 This module does not identify the expressions with the certificate files or
 establish a Krawczyk inclusion or a root-existence certificate.
@@ -75,7 +75,7 @@ theorem fderiv_eval_basis {ι : Type} [Fintype ι] [DecidableEq ι]
   rw [(hasFDerivAt_eval p v).fderiv]
   exact (partial_eval_eq_differential_basis p v i).symm
 
-/-- Interval evaluation of a symbolic partial encloses the actual derivative. -/
+/-- Interval evaluation of a symbolic partial encloses the real partial derivative. -/
 theorem intervalPartial_encloses {ι : Type} [Fintype ι] [DecidableEq ι]
     (p : PolynomialExpression ι) (v : ι → ℝ) (boxes : ι → RationalInterval)
     (h : ∀ i, (boxes i).Encloses (v i)) (i : ι) :

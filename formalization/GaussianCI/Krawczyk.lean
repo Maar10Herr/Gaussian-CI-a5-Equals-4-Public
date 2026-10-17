@@ -7,15 +7,15 @@ public import Mathlib.Tactic.Ring
 @[expose] public section
 
 /-!
-# An analytic root-existence bridge for preconditioned certificate systems
+# Root existence for preconditioned certificate systems
 
 The results below prove existence and uniqueness of a real zero from Banach
 contraction hypotheses.  In particular the closed-ball criterion derives both
 self-mapping and contraction from a residual bound and a derivative bound.
 
-This does not yet derive those hypotheses from the repository's rational
-interval evaluator or its componentwise Krawczyk inclusion test.  No theorem
-here asserts that any of the 364 certificate records passes this criterion.
+The repository's rational interval evaluator and componentwise Krawczyk test
+have not yet been proved to provide these hypotheses.  No theorem here asserts
+that any of the 364 certificate records passes this criterion.
 -/
 
 namespace GaussianCI
@@ -42,7 +42,7 @@ theorem preconditionedMap_fixed_iff {F : E → E} {C : E →L[ℝ] E}
   · intro hroot
     simp [preconditionedMap, hroot]
 
-/-- Banach's theorem gives a genuine zero on any nonempty closed invariant domain. -/
+/-- Banach's theorem gives a unique zero on any nonempty closed invariant domain. -/
 theorem exists_zero_of_contracting_preconditionedMap [CompleteSpace E]
     {F : E → E} {C : E →L[ℝ] E} {domain : Set E} {q : ℝ≥0}
     (hC : Function.Injective C) (hclosed : IsClosed domain)

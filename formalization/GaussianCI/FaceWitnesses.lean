@@ -58,7 +58,7 @@ noncomputable def faceWitness (omitted : Nat) (conditioned : Bool) :
     Matrix (Fin 4) (Fin 4) ℝ :=
   fun i j => (faceWitnessQ omitted conditioned i j : ℝ)
 
-/-- The actual almost-principal determinant, with rows `i :: K` and columns
+/-- The almost-principal determinant, with rows `i :: K` and columns
 `j :: K`. For valid elementary atoms the conditioning labels exclude `i,j`.
 The order of `K` agrees with the canonical increasing face-label order. -/
 noncomputable def fourAlmostPrincipal {α : Type*} [CommRing α]
@@ -78,7 +78,7 @@ def fourMinorFormula {α : Type*} [CommRing α]
       R i l * (R k j * R l k - R k k * R l j)
   | _ => 0
 
-/-- The explicit polynomial acceptance formula is the genuine determinant. -/
+/-- The explicit polynomial acceptance formula equals the determinant. -/
 theorem fourMinorFormula_eq_det {α : Type*} [CommRing α]
     (R : Matrix (Fin 4) (Fin 4) α) (i j : Fin 4) (K : List (Fin 4))
     (hK : K.length ≤ 2) : fourMinorFormula R i j K = fourAlmostPrincipal R i j K := by
@@ -184,9 +184,8 @@ theorem faceWitness_posDef (omitted : Nat) (conditioned : Bool)
     (faceWitness_diagonal omitted conditioned)
     (faceWitness_row_sum_lt_one omitted conditioned hface)
 
-/-- Agreement with the complete face CI structure, including all absent atoms.
-The left side is an actual real almost-principal determinant, not a catalogue
-membership test or merely a list of premises. -/
+/-- Agreement of each real almost-principal determinant with the complete face
+CI structure, including all absent atoms. -/
 theorem faceWitness_exact_pattern (omitted : Nat) (conditioned : Bool)
     (hface : (omitted, conditioned) ∈ fourFaces) (atom : FiniteAtom)
     (hatom : atom ∈ elementaryAtoms (faceVariables omitted)) :
@@ -250,9 +249,9 @@ def CycleRuleHolds (has : Nat → Nat → ConditioningMask → Bool) : Prop :=
     has 1 4 (2 ^ 5) = true ∧ has 1 5 (2 ^ 2) = true) → has 1 2 0 = true
 
 /-- The Gaussian-valid cycle implication is not a semantic consequence of
-requiring all ten four-faces to be Gaussian realizable. Its countermodel is
-accepted through actual covariance witnesses, independently of the 629-row
-classification. -/
+requiring all ten four-faces to be Gaussian realizable. Ten explicit covariance
+witnesses establish the countermodel's face realizability without using the
+629-row classification. -/
 theorem cycle_rule_not_four_local :
     ¬ ∀ has : Nat → Nat → ConditioningMask → Bool, FourLocalModel has → CycleRuleHolds has := by
   intro hlocal

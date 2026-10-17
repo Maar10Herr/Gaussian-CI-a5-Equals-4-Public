@@ -1,4 +1,4 @@
-# Third-party notices and scholarly inputs
+# Third-party notices and sources
 
 This repository contains original software, documentation, and proof
 certificates by Maarten Linus Herrmann. It does not redistribute third-party
@@ -16,8 +16,8 @@ the paper and README. In particular:
   framework discussed by Siegfried M. Rump.
 
 `independent/catalogue.py` reconstructs the four-gaussoid catalogue from the
-published axiom schemes. Its expected SHA-256 values are recorded as factual
-integrity identifiers. The upstream supplemental-material page is
+published axiom schemes and records the expected catalogue SHA-256 digests.
+The upstream supplemental-material page is
 <https://gaussoids.de/gaussoids.html>.
 
 Runtime dependencies are installed from their respective package indexes and

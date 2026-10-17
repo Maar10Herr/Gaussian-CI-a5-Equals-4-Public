@@ -4,15 +4,14 @@
 [![License: GPL v3+](https://img.shields.io/badge/License-GPL_v3%2B-blue.svg)](LICENSE)
 [![ORCID](https://img.shields.io/badge/ORCID-0009--0005--8721--6588-A6CE39.svg)](https://orcid.org/0009-0005-8721-6588)
 
-Exact verification of the sharp antecedent threshold for genuinely
-five-variable regular-Gaussian conditional-independence inference.
+Computer-assisted proof of the sharp antecedent threshold for regular-Gaussian
+conditional-independence implications with full five-label support that do not
+follow from complete four-variable inference.
 
-> [!NOTE]
-> **Computer-assisted theorem with independently replayable exact
-> certificates.** The result concerns elementary, singleton-conclusion Horn
-> implications for regular positive-definite Gaussians. Classification of all
-> four-antecedent implications and all five-variable Gaussian CI structures is
-> outside its scope.
+The repository contains the exact certificates and verifier. The result
+concerns elementary, singleton-conclusion Horn implications for regular
+positive-definite Gaussians. It does not classify all four-antecedent
+implications or all five-variable Gaussian CI structures.
 
 **[Read the paper](paper/Herrmann_Antecedent_Threshold_Gaussian_CI.pdf)** ·
 **[Inspect the certificates](certificates/)** ·
@@ -38,10 +37,11 @@ The upper bound uses the five-variable member of Šimeček's implication family,
 \Longrightarrow [12],
 ```
 
-and an explicit 80-atom `T4` countermodel. The lower bound classifies every
-three-antecedent premise set under label permutations and duality and supplies
-exact rational interval certificates for Gaussian counterexamples to every
-conclusion outside the four-local closure.
+and an explicit 80-atom `T4` countermodel. The lower bound reduces all
+three-antecedent premise sets under label permutations and duality, handles
+proper-support representatives analytically, and supplies exact rational
+interval certificates for conclusions outside the four-local closure in the
+full-support cases.
 
 ## Partial Lean formalization
 
@@ -53,9 +53,9 @@ dependencies, checks axiom dependencies, and requests one thread and 2048 MB per
 proof process; `make verify-lean` builds project modules sequentially after the
 mathlib cache is available.
 
-## Verify the theorem
+## Run the verifier
 
-The complete mathematical verification uses only the Python standard library:
+The core verifier uses only the Python standard library:
 
 ```sh
 make verify-core
@@ -64,7 +64,7 @@ make verify-core
 The command reconstructs all 679 labelled four-gaussoids directly from the
 axioms, selects the 629 regular-Gaussian structures using the five
 Lněnička-Matúš schemes, checks the upper-bound identity and countermodel,
-replays all 364 rational Krawczyk certificates, proves conclusion coverage,
+replays all 364 rational Krawczyk certificates, checks conclusion coverage,
 and runs deliberate-corruption and manifest checks.
 
 Expected principal output:
@@ -77,10 +77,11 @@ corruption_checks_ok cases=4
 manifest_ok entries=<release-specific count>
 ```
 
-The legacy output key `nonlocal=21167` counts rule orbits outside the computed
-`T4` closure. Each is refuted by a certified positive-definite Gaussian
-witness; these are not genuinely nonlocal valid implications. The manifest
-entry count depends on the release contents and is not a mathematical count.
+The legacy output key `nonlocal=21167` denotes rule orbits outside the computed
+`T4` closure. Each orbit has a certified positive-definite Gaussian
+counterexample, so none represents a Gaussian-valid implication outside `T4`.
+The manifest entry count depends on the release contents and is not a
+mathematical count.
 
 The component checks can also be run separately from the repository root:
 
@@ -112,28 +113,17 @@ uv run pytest -q
 uv build
 ```
 
-## Proof architecture
-
-```mermaid
-flowchart LR
-    A[Šimeček implication] --> B[Exact correlation identity]
-    B --> C[Four-antecedent upper bound]
-    D[80-atom countermodel] --> E[Failure of four-local derivability]
-    F[439 premise orbits] --> G[364 rational interval certificates]
-    G --> H[Three-antecedent lower bound]
-    C --> I[Antecedent threshold a5 = 4]
-    E --> I
-    H --> I
-```
+## Proof structure
 
 | Component | Exact object | Acceptance condition |
 |---|---|---|
 | Upper-bound validity | Sparse integer-polynomial identity | Telescoping identity agrees coefficient by coefficient |
 | Four-local nonlocality | 80-bit CI structure | Premises present, conclusion absent, all axioms and ten faces valid |
 | Catalogue | Deterministic CNF enumeration | `679` gaussoids, `629` retained, historical SHA-256 values reproduced |
-| Lower bound | 364 rational Krawczyk records | Strict inclusion, positive-definite interval matrix, nonzero conclusion minors |
+| Proper-support representatives | Extension lemma and four-variable catalogue | Every implication is Gaussian-invalid or follows from `T4` |
+| Full-support representatives | 364 rational Krawczyk records | Strict inclusion, positive-definite interval matrix, nonzero conclusion minors |
 | Exhaustiveness | 439 premise orbits and complete coverage sets | Every conclusion is four-locally forced or has a certified Gaussian counterexample |
-| Integrity | `MANIFEST.sha256` and hostile mutations | Altered proof objects are rejected |
+| Integrity | `MANIFEST.sha256` and modified release files | Digest mismatches and altered proof objects are rejected |
 
 ## Self-contained catalogue reconstruction
 
@@ -142,12 +132,11 @@ gaussoid axioms with a deterministic standard-library DPLL enumerator. The
 generated 679-row catalogue and its 629-row regular-Gaussian subset reproduce
 the published byte-level SHA-256 values.
 
-This design keeps the release independent of an undocumented third-party data
-licence while strengthening reproducibility: researchers can inspect the
-axioms, enumeration, higher-rule filter, and pinned digests in
-[`independent/catalogue.py`](independent/catalogue.py).
+Reconstructing the catalogues avoids redistributing data without a documented
+licence. [`independent/catalogue.py`](independent/catalogue.py) contains the
+axioms, enumerator, higher-rule filter, and expected digests.
 
-## Numerical and logical evidence
+## Verified counts
 
 | Quantity | Verified value |
 |---|---:|
@@ -189,14 +178,13 @@ print(len(symmetry_maps(range(1, 6))))  # 240
 The independent theorem verifier remains separate from the package and its
 SymPy/Z3 development dependencies.
 
-## Intellectual lineage
+## Prior work
 
 Šimeček supplied the general shared-endpoint implication family used for the
 upper bound. Lněnička and Matúš classified the four-variable case. Boege proved
 two-antecedental completeness of the gaussoid axioms and introduced
-selfadhesivity; Matúš and Sullivant provide central algebraic and global
-incompleteness results. Krawczyk and Rump supply the interval-verification
-framework.
+selfadhesivity. The certificate test follows Krawczyk's method as presented by
+Rump.
 
 Key references:
 
@@ -211,10 +199,6 @@ Key references:
   [doi:10.1016/j.jpaa.2008.11.026](https://doi.org/10.1016/j.jpaa.2008.11.026)
 - Rump, *Acta Numerica* 19 (2010),
   [doi:10.1017/S096249291000005X](https://doi.org/10.1017/S096249291000005X)
-
-The contribution of this project is the sharp five-variable threshold relative
-to complete four-local inference, together with the countermodel, exhaustive
-lower-bound computation, and exact replayable certificates.
 
 ## Repository map
 
@@ -236,9 +220,7 @@ specific release used. Author:
 
 ## License
 
-The original software is licensed under
-[GPL-3.0-or-later](LICENSE). The reciprocal licence keeps distributed changes
-to the implementation and verifier available under the same terms. The paper
-is copyright © 2026 Maarten Linus Herrmann; all rights reserved. Cited works,
-mathematical results, and upstream project names remain subject to their
-respective terms; see [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md).
+The software is licensed under [GPL-3.0-or-later](LICENSE). The paper is
+copyright © 2026 Maarten Linus Herrmann; all rights reserved. Third-party
+sources and dependency licences are listed in
+[`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md).

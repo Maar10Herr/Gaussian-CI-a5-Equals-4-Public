@@ -10,11 +10,10 @@ import Lean.Elab.Tactic.RCases
 @[expose] public section
 
 /-!
-# Logical bridge from checked witness coverage to a threshold theorem
+# Threshold consequences of checked witness coverage
 
-These theorems are conditional: they do not assert that the Gaussian certificate
-file, closure computation, four-variable catalogue, or symmetry reduction has
-been checked in Lean.  Their hypotheses expose those separate obligations.
+These theorems take validation of the Gaussian certificate file, closure
+computation, four-variable catalogue, and symmetry reduction as hypotheses.
 Models are sets of atoms; the intended Gaussian model family must ultimately be
 constructed from positive-definite real covariance matrices.
 -/
@@ -31,7 +30,7 @@ def Satisfies (model : Set Atom) (premises : Finset Atom) : Prop :=
 def ValidIn (models : Set (Set Atom)) (premises : Finset Atom) (conclusion : Atom) : Prop :=
   ∀ model ∈ models, Satisfies model premises → conclusion ∈ model
 
-/-- A genuine semantic counterexample, rather than a failed proof search. -/
+/-- A model satisfying the premises and omitting the conclusion. -/
 def HasCounterexample (models : Set (Set Atom)) (premises : Finset Atom)
     (conclusion : Atom) : Prop :=
   ∃ model ∈ models, Satisfies model premises ∧ conclusion ∉ model
@@ -72,7 +71,7 @@ theorem counterexample_mono_premises {models : Set (Set Atom)}
   rcases hcounter with ⟨model, hmodel, hpremises, hconclusion⟩
   exact ⟨model, hmodel, satisfies_mono hsub hpremises, hconclusion⟩
 
-/-- Soundness required of the actual closure implementation. -/
+/-- Soundness required of a closure computation. -/
 def ClosureSound (models : Set (Set Atom)) (closure : Finset Atom → Finset Atom) : Prop :=
   ∀ premises conclusion, conclusion ∈ closure premises → ValidIn models premises conclusion
 
@@ -141,7 +140,7 @@ theorem valid_forces_closure_of_counterexamples
   by_contra houtside
   exact not_validIn_of_counterexample (hcoverage conclusion houtside) hvalid
 
-/-- The mathematical bridge used by the paper's exhaustive witness criterion. -/
+/-- Sound closure and exhaustive counterexamples imply local validity. -/
 theorem valid_implies_local_of_sound_closure_and_coverage
     {gaussianModels localModels : Set (Set Atom)}
     {closure : Finset Atom → Finset Atom} {premises : Finset Atom} {conclusion : Atom}
@@ -235,14 +234,14 @@ theorem premise_minimal_four_of_lower_bound
   have hbound : smaller.card ≤ 3 := by omega
   exact hlower smaller conclusion hbound hsmaller
 
-/-- The paper's genuine-rule conditions, with support supplied as an explicit predicate. -/
+/-- Conditions for a valid full-support rule outside the local model family. -/
 def GenuineBeyond (gaussianModels localModels : Set (Set Atom))
     (fullSupport : Finset Atom → Atom → Prop) (premises : Finset Atom)
     (conclusion : Atom) : Prop :=
   ValidIn gaussianModels premises conclusion ∧ fullSupport premises conclusion ∧
     ¬ ValidIn localModels premises conclusion
 
-/-- Conditional threshold theorem: no actual Gaussian data are discharged here. -/
+/-- Conditional threshold theorem with Gaussian data supplied through hypotheses. -/
 theorem threshold_four_of_upper_and_lower
     {gaussianModels localModels : Set (Set Atom)}
     {fullSupport : Finset Atom → Atom → Prop}

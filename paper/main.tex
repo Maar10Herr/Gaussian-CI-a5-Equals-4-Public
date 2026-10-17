@@ -50,31 +50,31 @@
 \vspace{-1.25em}
 
 \begin{abstract}
-We determine the least number of antecedents needed for a genuinely five-variable Gaussian conditional-independence implication beyond all four-variable inference.  Call an elementary Horn rule four-local if it is a semantic consequence of requiring every marginal and conditional four-variable face to be regular-Gaussian realizable.  Let $a_5$ be the least number of distinct antecedents in a premise-minimal valid rule with full five-label support that is not four-local.  We prove
+We determine the minimum number of antecedents in a valid five-variable Gaussian conditional-independence implication that is not a consequence of the complete four-variable theory.  Call an elementary Horn rule four-local if it is a semantic consequence of requiring every marginal and conditional four-variable face to be regular-Gaussian realizable.  Let $a_5$ be the least number of distinct antecedents in a premise-minimal valid rule with full five-label support that is not four-local.  We prove
 \[
  a_5=4.
 \]
-The upper bound is supplied by the five-variable instance of \v{S}ime\v{c}ek's implication,
+Write $[ij\mid K]$ for $X_i\perp X_j\mid X_K$ and $[ij]$ for $X_i\perp X_j$.  For the upper bound, we use the five-variable instance of \v{S}ime\v{c}ek's implication,
 \[
  [12\mid3]\wedge[13\mid4]\wedge[14\mid5]\wedge[15\mid2]\Longrightarrow[12],
 \]
-together with an explicit 80-atom model of the complete marginal and conditional four-variable theory that violates the conclusion.  For the lower bound, all three-antecedent sets are classified under label permutations and duality.  Proper-support cases are reduced analytically, while the full-support cases are settled by rational Krawczyk certificates that provide positive-definite Gaussian counterexamples for every conclusion not forced by the four-local theory.  An exact-arithmetic verifier rebuilds the finite catalogues and orbit reductions and checks the countermodel, interval certificates, and coverage conditions.
+together with an 80-atom model of the complete marginal and conditional four-variable theory that satisfies the premises and violates the conclusion.  For the lower bound, all three-antecedent sets are classified under label permutations and duality.  A positive-definite extension handles representatives with proper premise support.  For representatives with full premise support, rational Krawczyk certificates give positive-definite Gaussian counterexamples to every conclusion outside the computed sound closure.  An exact-arithmetic verifier checks the catalogues, orbit reductions, countermodel, interval certificates, and coverage.
 \end{abstract}
 
 \section{Introduction}
 
-For a regular Gaussian vector, an elementary conditional-independence statement $X_i\perp X_j\mid X_K$ is equivalent to the vanishing of an almost-principal minor of its covariance matrix.  A Horn implication among such statements asks whether one minor must vanish whenever a specified collection of other minors vanishes throughout the positive-definite cone.  This formulation connects Gaussian conditional independence with polynomial relations and finite implication systems~\cite{Matus2005}.
+For a regular Gaussian vector, an elementary conditional-independence statement $X_i\perp X_j\mid X_K$ is equivalent to the vanishing of an almost-principal minor of its covariance matrix.  A Horn implication among such statements asks whether one minor must vanish whenever a specified collection of other minors vanishes throughout the positive-definite cone~\cite{Matus2005}.
 
 The gaussoid axioms give universal local rules for these implications.  They characterize regular-Gaussian structures on three labels, but on four labels additional relations are needed.  Ln\v{e}ni\v{c}ka and Mat\'u\v{s} classified the four-variable case: of the 679 four-gaussoids, 629 are regular-Gaussian realizable, separated by five further implication schemes~\cite{LM2007}.  No finite collection of bounded-variable rules characterizes Gaussian conditional independence in all dimensions~\cite{Simecek2006,Sullivant2009}.
 
-Here the complexity of an implication is measured by its number of distinct antecedents.  Boege proved that every regular-Gaussian inference form with at most two antecedents follows from the gaussoid axioms~\cite{Boege2022,BoegeCorrection2022}.  The next question is finite: on five labels, how many antecedents are needed for a valid elementary Horn implication that cannot be recovered from the complete four-variable theory?
+We measure the complexity of an implication by its number of distinct antecedents.  Boege proved that every regular-Gaussian inference form with at most two antecedents follows from the gaussoid axioms~\cite{Boege2022,BoegeCorrection2022}.  On five labels, we seek the least number of antecedents in a valid elementary Horn implication that is not a consequence of the complete four-variable theory.
 
 Let $\Tfour$ denote the theory obtained by requiring all five marginal and all five conditional four-variable faces to belong to the 629-element regular-Gaussian catalogue.  Define $a_5$ as the least number of antecedents in a premise-minimal valid rule with full five-label support that is not a semantic consequence of $\Tfour$.  The main result is
 \[
  \boxed{a_5=4}.
 \]
 
-The upper bound uses the five-variable instance of \v{S}ime\v{c}ek's implication and a direct correlation proof.  An explicit 80-bit $\Tfour$ model satisfies its four premises and violates its conclusion, so the rule is genuinely beyond four-local inference.  For the lower bound, all three-antecedent sets are reduced under permutations and duality.  Proper-support representatives are treated by a positive-definite extension argument; full-support representatives are settled by rational interval certificates that cover every conclusion outside the iterated $\Tfour$ closure.
+The upper bound follows from a correlation proof of the five-variable instance of \v{S}ime\v{c}ek's implication.  An 80-bit $\Tfour$ model satisfies its four premises and violates its conclusion, proving that the rule is not four-local.  For the lower bound, all three-antecedent sets are reduced under permutations and duality.  A positive-definite extension proves the claim for proper-support representatives; rational interval certificates cover every conclusion outside the iterated $\Tfour$ closure for full-support representatives.
 
 The result concerns elementary singleton-conclusion Horn implications for regular positive-definite Gaussians.  It does not classify all four-antecedent rules or all five-variable Gaussian CI structures.  Sections~\ref{sec:setup}--\ref{sec:lower} define the problem and prove the two bounds.  Section~\ref{sec:verification} summarizes the computational proof, Section~\ref{sec:prior} places the threshold in the literature, and the appendices specify the countermodel, catalogue construction, and certificate data.
 
@@ -102,7 +102,7 @@ A \emph{regular-Gaussian CI structure} is the set of elementary atoms whose almo
  [ij\mid k]\quad\Longleftrightarrow\quad r_{ij}-r_{ik}r_{jk}=0.
 \end{equation}
 
-A \emph{gaussoid} is an elementary CI structure satisfying the four standard gaussoid axiom schemes~\cite{Matus2005,LM2007,Geometry2019}.  Every regular-Gaussian structure is a gaussoid, but the converse fails.  This distinction is essential: the finite countermodel in Section~\ref{sec:nonlocal} is an abstract gaussoid with realizable four-faces, not a claimed five-variable Gaussian realization.
+A \emph{gaussoid} is an elementary CI structure satisfying the four standard gaussoid axiom schemes~\cite{Matus2005,LM2007,Geometry2019}.  Every regular-Gaussian structure is a gaussoid, but the converse fails.
 
 \subsection{Marginal and conditional four-faces}
 
@@ -116,13 +116,13 @@ The \emph{conditional four-face at $x$} is obtained by restricting to atoms that
 \]
 A regular Gaussian remains regular Gaussian after marginalization or conditioning, so every such face is a realizable four-variable structure.
 
-The four-variable catalogue contains 679 gaussoids and exactly 629 regular-Gaussian structures~\cite{LM2007}; denote the latter set by $\Tfour^{(4)}$.  The computation enumerates all models of the elementary gaussoid axioms on the 24 four-variable atoms, then retains those satisfying the five additional Ln\v{e}ni\v{c}ka--Mat\'u\v{s} implication schemes.  This reconstructs the catalogue from the axioms rather than reading a supplied list.  Its identification with the regular-Gaussian structures uses the classification theorem in~\cite{LM2007}.
+The four-variable catalogue contains 679 gaussoids and exactly 629 regular-Gaussian structures~\cite{LM2007}; denote the latter set by $\Tfour^{(4)}$.  The computation enumerates all models of the elementary gaussoid axioms on the 24 four-variable atoms, then retains those satisfying the five additional Ln\v{e}ni\v{c}ka--Mat\'u\v{s} implication schemes.  The identification of the retained models with regular-Gaussian structures uses the classification theorem in~\cite{LM2007}.
 
 \begin{definition}[The four-local theory $\Tfour$]\label{def:t4}
 A five-label elementary CI structure is a model of $\Tfour$ if each of its ten marginal and conditional four-faces belongs to $\Tfour^{(4)}$.  A Horn implication is a semantic consequence of $\Tfour$ if it holds in every such 80-bit model.
 \end{definition}
 
-The computation also uses a constructive closure.  For each face, retain the members of $\Tfour^{(4)}$ containing the current face premises and adjoin every atom common to them; repeat over the ten faces to a fixed point.  Each added atom holds in every compatible four-variable model, so the procedure is sound for Definition~\ref{def:t4}.  Section~\ref{sec:lower} proves that every Gaussian-valid conclusion with three antecedents belongs to this closure.  By contrast, a single global 80-bit model of Definition~\ref{def:t4} refutes semantic consequence and hence every such derivation.
+The computation also uses a constructive closure.  For each face, retain the members of $\Tfour^{(4)}$ containing the current face premises and adjoin every atom common to them; repeat over the ten faces to a fixed point.  Each added atom holds in every compatible four-variable model, so the procedure is sound for Definition~\ref{def:t4}.  Section~\ref{sec:lower} proves that every Gaussian-valid conclusion with three antecedents belongs to this closure.  A global 80-bit model of Definition~\ref{def:t4} satisfying the premises and omitting the conclusion refutes semantic consequence and hence every such derivation.
 
 Every five-variable gaussoid-axiom instance is contained in one of these faces.  It has three distinguished labels and a background conditioning set $L$.  If $|L|\le1$, an unused label can be omitted; if $|L|=2$, conditioning the entire face on either member of $L$ contains the instance.  Thus every $\Tfour$ model is itself a gaussoid.
 
@@ -209,24 +209,24 @@ Positive definiteness gives $|p_j|<1$ for every $j$, hence $a_1=0$.  This notati
 
 \section{Nonlocality and premise minimality}\label{sec:nonlocal}
 
-Analytic validity does not show that a rule escapes four-variable inference.  That claim is certified by a finite countermodel.
+To prove that the rule is not a consequence of the four-variable theory, we give a finite countermodel.
 
 \begin{proposition}[$\Tfour$ nonlocality]\label{prop:nonlocal}
 There exists an 80-bit model of all ten $\Tfour$ face constraints that contains the four premises of \eqref{eq:cycle5} and omits the atom $[12]$.  Hence \eqref{eq:cycle5} is not a semantic consequence of $\Tfour$.
 \end{proposition}
 
 \begin{proof}
-Appendix~\ref{app:atoms} defines the bit order and prints the complete bitstring.  The verifier performs four checks.
+The bitstring in Appendix~\ref{app:atoms} satisfies the following conditions, checked exhaustively.
 \begin{enumerate}
  \item Bits $1,10,20,25$, corresponding to the atoms $[12\mid3]$, $[13\mid4]$, $[14\mid5]$, and $[15\mid2]$, are one; bit $0$, corresponding to the atom $[12]$, is zero.
- \item Every instance of the four elementary gaussoid axiom schemes is evaluated directly on all ordered triples and background conditioning sets.
- \item For each omitted label, the 24 marginal bits are extracted in canonical four-atom order and matched against the 629-element catalogue.
- \item The same is done for the 24 atoms conditioning throughout on that label.
+ \item Every instance of the four elementary gaussoid axiom schemes holds for all ordered triples and background conditioning sets.
+ \item For each omitted label, the marginal face in canonical 24-atom order belongs to the 629-element catalogue.
+ \item For each label, the conditional face in the same order belongs to the catalogue.
 \end{enumerate}
 All ten masks belong to $\Tfour^{(4)}$.  The bitstring is therefore a global model of Definition~\ref{def:t4} and a countermodel to the implication.
 \end{proof}
 
-The countermodel is not asserted to be five-variable Gaussian-realizable; indeed validity of \eqref{eq:cycle5} rules that out.  Its role is purely proof-theoretic: it separates the complete four-face model class from regular-Gaussian inference.
+The countermodel is an abstract gaussoid with realizable four-faces.  Since it violates the valid implication~\eqref{eq:cycle5}, it has no five-variable Gaussian realization.
 
 \begin{corollary}[Premise minimality]\label{cor:minimal}
 The four antecedents in \eqref{eq:cycle5} are premise-minimal.
@@ -238,7 +238,7 @@ The full premise set does not force the atom $[12]$ in $\Tfour$.  By monotonicit
 
 \section{The three-antecedent lower bound}\label{sec:lower}
 
-For Proposition~\ref{prop:lower}, the layer with three antecedents is finite, and the cases with fewer antecedents follow from Boege's two-antecedental completeness theorem.  Proper-support premise sets are handled analytically; full-support sets require certified Gaussian counterexamples.
+For Proposition~\ref{prop:lower}, we classify the finitely many three-antecedent premise sets.  The cases with fewer antecedents follow from Boege's two-antecedental completeness theorem.  Proper-support representatives are handled analytically; full-support representatives require certified Gaussian counterexamples.
 
 \subsection{Finite enumeration and symmetry reduction}
 
@@ -247,7 +247,7 @@ There are $\binom{80}{3}=82{,}160$ sets of three distinct atoms.  We quotient th
  G=S_5\times\langle *\rangle,
  \qquad [ij\mid K]^*=[ij\mid N\setminus(K\cup\{i,j\})].
 \]
-Label permutations plainly preserve Gaussian validity and $\Tfour$.  For a positive-definite covariance matrix, inversion realizes duality on its CI structure.  This follows from Jacobi's complementary-minor identity
+Label permutations preserve Gaussian validity and $\Tfour$.  For a positive-definite covariance matrix, inversion realizes duality on its CI structure.  This follows from Jacobi's complementary-minor identity
 \[
  \det\bigl((\Sigma^{-1})_{I,J}\bigr)
  =\pm\frac{\det(\Sigma_{J^c,I^c})}{\det\Sigma},
@@ -256,7 +256,7 @@ applied to the almost-principal minors.  Duality also exchanges marginal and con
 
 The enumeration selects one lexicographically canonical representative $P$ from each premise orbit.  For fixed $P$, conclusions are further quotiented by the stabilizer $G_P$.  If $P\Rightarrow c$ is invalid or $\Tfour$-local, applying any $g\in G$ gives the same alternative for $gP\Rightarrow gc$; no rule is lost by these two orbit reductions.  The constructive closure is also equivariant: $C(gP)=gC(P)$, since $G$ permutes the ten faces and preserves their catalogues.
 
-Premise support is not invariant under duality, because a previously absent label can enter a conditioning set.  The terms \emph{proper support} and \emph{full support} in Table~\ref{tab:counts} therefore refer to the selected representative, not to the whole orbit.  There are 105 mixed-support orbits.  This does not affect the reduction: the validity-or-locality conclusion established at a representative transfers to every member of its orbit.
+Premise support is not invariant under duality, because a previously absent label can enter a conditioning set.  The terms \emph{proper support} and \emph{full support} in Table~\ref{tab:counts} therefore refer to the selected representative.  There are 105 orbits containing triples of both types.  Since Gaussian validity and $\Tfour$ consequence are orbit invariant, the conclusion proved for a representative holds for every member of its orbit.
 
 \begin{table}[ht]
 \centering
@@ -279,15 +279,15 @@ Rational interval certificates & 364 & One box for 306 representatives and two b
 \end{tabular}
 \end{table}
 
-The 439 representatives split into 104 proper-support and 335 full-support cases.  Lemma~\ref{lem:extension} below disposes of the proper-support cases.  For each full-support representative $P$, the verifier computes the fixed point $C(P)$ of the constructive $\Tfour$ closure from Section~\ref{sec:setup}.  Membership $c\in C(P)$ gives a sound four-local derivation of $P\Rightarrow c$.
+The 439 representatives split into 104 proper-support and 335 full-support cases.  Lemma~\ref{lem:extension} proves the claim for the proper-support cases.  For each full-support representative $P$, the verifier computes the fixed point $C(P)$ of the constructive $\Tfour$ closure from Section~\ref{sec:setup}.  Membership $c\in C(P)$ gives a sound four-local derivation of $P\Rightarrow c$.
 
-It remains to rule out Gaussian validity for conclusions outside $C(P)$.  Quotienting the nontrivial conclusions $c\notin P$ by $G_P$ gives 21,357 rule orbits across the 335 representatives.  Of these, 190 lie in the computed closure and 21,167 do not.  The latter are candidate implications refuted by Gaussian witnesses, not nonlocal valid implications.
+It remains to rule out Gaussian validity for conclusions outside $C(P)$.  Quotienting the nontrivial conclusions $c\notin P$ by $G_P$ gives 21,357 rule orbits across the 335 representatives.  Of these, 190 lie in the computed closure and 21,167 do not.  Each of the latter is Gaussian-invalid, as shown by a certified witness.
 
-For each $P$, a certificate carries a set of conclusion atoms whose almost-principal minors are certified nonzero at its Gaussian root.  The verifier requires the union of these cover sets to be exactly
+For each $P$, a certificate records a set of conclusion atoms whose almost-principal minors are certified nonzero at its Gaussian root.  The union of these cover sets is checked to equal
 \[
  \A_5\setminus C(P).
 \]
-This equality is checked on all 80 atoms, separately for each of the 335 full-support representatives.  Its mathematical consequence is the following.
+This equality is checked on all 80 atoms, separately for each of the 335 full-support representatives.
 
 \begin{proposition}[Exhaustive witness criterion]\label{prop:coverage}
 For each canonical full-support premise triple $P$, every conclusion $c\in\A_5$ either belongs to the sound closure $C(P)$ or has a positive-definite Gaussian counterexample satisfying $P$.  Consequently, every regular-Gaussian-valid implication $P\Rightarrow c$ has $c\in C(P)$ and is a semantic consequence of $\Tfour$.
@@ -303,11 +303,11 @@ A correlation matrix on five labels has ten off-diagonal coordinates, ordered by
 \[
  (12),(13),(14),(15),(23),(24),(25),(34),(35),(45).
 \]
-For a premise triple $P=(p_1,p_2,p_3)$, the discovery program chooses three coordinates $y=(y_1,y_2,y_3)$ as unknowns and fixes the remaining seven to rational numbers.  It forms
+For a premise triple $P=(p_1,p_2,p_3)$, each certificate designates three coordinates $y=(y_1,y_2,y_3)$ as unknowns and fixes the remaining seven at rational values.  Define
 \[
  F(y)=\bigl(\AP_{p_1}(R(y)),\AP_{p_2}(R(y)),\AP_{p_3}(R(y))\bigr).
 \]
-A numerical root is used only to propose a box.  The proof data consist of a rational box $X=X_1\times X_2\times X_3$, rational fixed coordinates, and a rational nonsingular preconditioner $C$.  All polynomial and Jacobian interval evaluations use exact rational arithmetic.
+The certificate consists of a rational box $X=X_1\times X_2\times X_3$, the fixed rational coordinates, and a nonsingular rational preconditioner $C$.  All polynomial and Jacobian interval evaluations use exact rational arithmetic.
 
 For midpoint $x\in X$ and an interval enclosure $F'(X)$ of the Jacobian, define the Krawczyk operator~\cite{Krawczyk1969,Rump2010}
 \begin{equation}\label{eq:krawczyk}
@@ -317,23 +317,23 @@ The strict componentwise inclusion
 \begin{equation}\label{eq:strictK}
  K(x,X)\subset\operatorname{int}(X)
 \end{equation}
-with nonsingular $C$ satisfies the standard Krawczyk existence-and-uniqueness criterion~\cite{Krawczyk1969,Rump2010}: $F$ has exactly one real zero in $X$.  Only existence is needed for the implication classification; uniqueness records the stronger certified conclusion.
+with nonsingular $C$ satisfies the standard Krawczyk existence-and-uniqueness criterion~\cite{Krawczyk1969,Rump2010}: $F$ has exactly one real zero in $X$.  Existence suffices for the classification; the criterion also proves uniqueness in the box.
 
-At that root, positive definiteness follows from Sylvester's criterion.  The determinant of every leading principal block of the full interval matrix has a strictly positive lower endpoint.  For every conclusion index in the certificate's \code{covers} list, interval evaluation of its almost-principal minor excludes zero.  Therefore the root is an actual regular-Gaussian counterexample to every covered conclusion.
+At that root, positive definiteness follows from Sylvester's criterion.  The determinant of every leading principal block of the full interval matrix has a strictly positive lower endpoint.  For each conclusion atom listed in the certificate, interval evaluation of its almost-principal minor excludes zero.  The root is therefore a regular-Gaussian counterexample to every covered conclusion.
 
-One premise triple can have disconnected or algebraically distinct solution branches.  A single witness need not refute all nonforced conclusions.  The certificates use one box for 306 canonical full-support representatives and two boxes for the remaining 29, with the union of their cover sets providing the required coverage.  No claim requires all nonforced conclusions to fail at one Gaussian matrix.
+A single witness need not refute every conclusion outside the closure.  One certificate suffices for 306 canonical full-support representatives; for each of the remaining 29, the union of two certificates' cover sets equals $\A_5\setminus C(P)$.
 
 \subsection{Worked certificate}
 
-Certificate 272 (zero-based record index) treats the canonical premises
+Certificate 272 (numbered from zero) treats the canonical premises
 \[
  [12\mid3],\qquad[13\mid4],\qquad[14\mid5]
 \]
-and is also the premise-minimality witness orbit from Corollary~\ref{cor:minimal}.  Its unknown coordinates are $r_{12},r_{13},r_{14}$.  The other seven correlations are fixed rational numbers.  Table~\ref{tab:worked} gives decimal renderings for readability; the verifier reads the numerator--denominator pairs in the JSON file.
+and also supplies the premise-minimality witnesses in Corollary~\ref{cor:minimal}.  Its unknown coordinates are $r_{12},r_{13},r_{14}$.  The other seven correlations are fixed rational numbers.  Table~\ref{tab:worked} gives outward decimal enclosures; the supplementary data contain the exact rational values.
 
 \begin{table}[ht]
 \centering
-\caption{Rational certificate 272.  Coordinate intervals are outward decimal enclosures of the exact boxes; acceptance margins refer to the original rational boxes.}
+\caption{Rational certificate 272.  Coordinate intervals are outward decimal enclosures of the exact boxes; the stated margins are computed from the original rational boxes.}
 \label{tab:worked}
 \begin{tabular}{lll}
 \toprule
@@ -355,7 +355,7 @@ The fixed correlations, in pair order $(15),(23),(24),(25),(34),(35),(45)$, are 
 \[
  (-0.231821,-0.053400,0.144036,-0.179468,0.162966,-0.256434,0.141924).
 \]
-The certificate record gives the rational box, all seven fractions, the $3\times3$ rational matrix $C$, and 77 covered nonforced atoms.
+The supplementary data give the rational box, all seven fractions, the $3\times3$ rational matrix $C$, and certified nonvanishing for 77 atoms outside the closure.
 
 \FloatBarrier
 \subsection{Proper-support extension lemma}
@@ -378,7 +378,7 @@ The almost-principal minor $g_c(E)$ for a conclusion involving an outside label 
 Thus each unwanted conclusion defines a proper algebraic subset of an open neighborhood of $E=0$.  A finite union of proper real algebraic subsets cannot fill that neighborhood.  Rational points are dense, so a sufficiently small rational $E$ avoids all of them while preserving positive definiteness and every premise.
 \end{proof}
 
-If both premises and conclusion lie in $S$, any regular Gaussian on $S$ extends independently to five labels.  Conversely, embed $S$ in a four-label marginal face, adding unused labels when $|S|<4$.  A valid implication on $S$ holds in every regular-Gaussian structure in the complete four-variable catalogue and hence in that face of every $\Tfour$ model.  It is therefore $\Tfour$-local.  Lemma~\ref{lem:extension} disposes of every conclusion outside $S$.  Thus every rule at any of the 104 canonical proper-support representatives is invalid or $\Tfour$-local.  This alternative transfers to every member of each representative's orbit, including members with full support.
+If both premises and conclusion lie in $S$, any regular Gaussian on $S$ extends independently to five labels.  Conversely, embed $S$ in a four-label marginal face, adding unused labels when $|S|<4$.  A valid implication on $S$ holds in every regular-Gaussian structure in the complete four-variable catalogue and hence in that face of every $\Tfour$ model.  It is therefore $\Tfour$-local.  Lemma~\ref{lem:extension} shows that $P\Rightarrow c$ is Gaussian-invalid whenever $c$ uses a label outside $S$.  Thus every rule at any of the 104 canonical proper-support representatives is invalid or $\Tfour$-local.  Orbit invariance extends this conclusion to every member of the orbit, including members with full support.
 
 \subsection{Zero, one, and two antecedents}
 
@@ -388,7 +388,7 @@ Proposition~\ref{prop:coverage} handles the full-support representatives; Lemma~
 
 \section{Verification}\label{sec:verification}
 
-The computational proof checks finite combinatorial objects and rational interval inequalities.  Numerical searches propose witness boxes but do not enter the acceptance conditions in Table~\ref{tab:architecture}.
+The finite enumerations and rational interval inequalities in Table~\ref{tab:architecture} are checked in exact arithmetic.  Numerical search is used only to locate candidate boxes.
 
 \begin{table}[ht]
 \centering
@@ -400,7 +400,7 @@ The computational proof checks finite combinatorial objects and rational interva
 Claim & Proof object & Arithmetic domain\\
 \midrule
 $|\A_5|=80$, symmetry order 240 & atom enumeration and permutation/duality maps & finite integer combinatorics\\
-$\Tfour^{(4)}$ has 629 models & exhaustive axiom-model enumeration and five additional implication schemes & finite bit logic\\
+629 retained four-variable models & exhaustive axiom-model enumeration and five additional implication schemes & finite bit logic\\
 Upper-bound validity & telescoping identity~\eqref{eq:telescoping} & integer polynomials\\
 Upper-bound nonlocality & 80-bit countermodel and ten face masks & finite bit logic\\
 Three-antecedent exhaustion & 439 premise orbits; 105 mixed-support; 21,357 rule orbits in the certified stratum & finite group action\\
@@ -412,7 +412,7 @@ Premise minimality & four deletion mappings to certificate 272 & finite symmetry
 \end{tabular}
 \end{table}
 
-For every witness, acceptance requires a nonsingular rational preconditioner, strict Krawczyk inclusion, positive leading-principal determinant enclosures, and nonzero conclusion-minor enclosures.  Coverage is checked against the complement of each computed closure.  The catalogue is reconstructed by exhaustive CNF enumeration with unit propagation and branching; the link between the retained 629 structures and Gaussian realizability is the published classification~\cite{LM2007}.
+For each witness, the proof checks a nonsingular rational preconditioner, strict Krawczyk inclusion, positive leading-principal determinant enclosures, and nonzero conclusion-minor enclosures.  Coverage is checked against the complement of each computed closure.  Exhaustive enumeration of the CNF models gives 679 gaussoids; the five additional implication schemes retain 629, identified with the regular-Gaussian structures by the classification theorem in~\cite{LM2007}.
 
 \section{Related work}\label{sec:prior}
 
@@ -436,12 +436,12 @@ Theorem~\ref{thm:main} determines the least antecedent count but not the full se
 The classification in this paper is limited to elementary CI atoms, singleton-conclusion Horn implications, regular positive-definite Gaussians, five labels, and at most three antecedents in the lower-bound search.  It does not cover singular Gaussians, disjunctive conclusions, or general semigraphoids.
 
 \paragraph{Reproducibility.}
-The certificates and independent verifier are available in the \href{https://github.com/Maar10Herr/Gaussian-CI-a5-Equals-4-Public/tree/v0.3.1}{versioned repository}.  From its root, \code{make verify-core} checks the finite enumeration, polynomial identity, countermodel, and rational interval certificates.
+The certificate data and exact-arithmetic verifier are available in software release \href{https://github.com/Maar10Herr/Gaussian-CI-a5-Equals-4-Public/tree/v0.3.1}{v0.3.1}.  From the repository root, \code{make verify-core} checks the finite enumeration, polynomial identity, countermodel, and rational interval certificates.
 
-\href{https://github.com/Maar10Herr/Gaussian-CI-a5-Equals-4-Public/tree/main/formalization}{Supplementary Lean proofs} establish the positive-definite matrix implication~\eqref{eq:cycle5}, its four-local nonderivability, and premise minimality.
+\href{https://github.com/Maar10Herr/Gaussian-CI-a5-Equals-4-Public/tree/main/formalization}{Supplementary Lean proofs} formalize the positive-definite covariance-matrix implication~\eqref{eq:cycle5}, its four-local countermodel, and premise minimality.
 
 \paragraph{Acknowledgment.}
-I thank Tobias Boege for pointing out \v{S}ime\v{c}ek's earlier implication family and for his comments on terminology and presentation.  Generative-AI systems assisted with literature search, conjecture and proof development, computational implementation and checking, and manuscript drafting and revision.  The author directed the work and takes responsibility for the results, supporting evidence, and final text.
+I thank Tobias Boege for pointing out \v{S}ime\v{c}ek's earlier implication family and for his comments on terminology and presentation.  Generative-AI systems assisted with literature search, conjecture and proof development, computational implementation and checking, and manuscript drafting and revision.  I take responsibility for the arguments, computations, and final text.
 
 \appendix
 \section{Canonical atom order and countermodel}\label{app:atoms}
@@ -450,7 +450,7 @@ The 80 atoms are ordered deterministically.  Iterate unordered endpoint pairs $(
 \[
  [12],\ [12\mid3],\ [12\mid4],\ [12\mid34],
 \]
-and the same mask convention continues through pair $(4,5)$.  This rule uniquely determines every index without relying on a prose table.
+and the same mask convention continues through pair $(4,5)$.  This convention uniquely determines every index.
 
 The nonlocality countermodel is
 \begin{center}
@@ -461,9 +461,7 @@ where one means membership in the abstract CI structure.
 
 \section{Construction of the four-variable catalogue}\label{app:t4}
 
-The computation orders the 24 elementary CI atoms, translates every elementary gaussoid-axiom instance into CNF, and enumerates every satisfying assignment by deterministic unit propagation and branching.  It obtains 679 distinct models without reading a catalogue file.  Each model is then tested, under every permutation of four labels, against the five additional implication schemes numbered (17)--(21) by Ln\v{e}ni\v{c}ka and Mat\'u\v{s}~\cite{LM2007}.  Exactly 50 models violate at least one scheme, leaving the 629 regular-Gaussian structures.
-
-A face map is a tuple of 24 indices into the five-label 80-atom order.  For omitted label $x$, the marginal map leaves all conditioning sets unchanged; the conditional map unions $\{x\}$ into every conditioning set.  This gives the ten face maps used in the computation.
+Translating every elementary gaussoid-axiom instance on the 24 four-variable atoms into propositional clauses and enumerating all satisfying assignments gives 679 models.  Each model is tested, under every permutation of four labels, against the five additional implication schemes numbered (17)--(21) by Ln\v{e}ni\v{c}ka and Mat\'u\v{s}~\cite{LM2007}.  Exactly 50 models violate at least one scheme, leaving 629.  By the classification theorem in~\cite{LM2007}, these are precisely the regular-Gaussian structures.
 
 \section{Certificate data}\label{app:cert}
 
