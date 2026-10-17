@@ -1,5 +1,17 @@
 # Changelog
 
+## Manuscript 0.4 clarifications — 2026-10-17
+
+- Clarify marginal-independence notation, atom indices, and the zero-based
+  certificate record index so they cannot be mistaken for citations or results.
+- Link the supplementary Lean proofs in one sentence naming the proved
+  components, and remove the superseded formalization open-problem item.
+  Retain the mathematical arguments in the manuscript.
+- Remove implementation details from the abstract and reproducibility
+  paragraph and an editorial explanation of omitted fractions.
+- Refresh the PDF and three-file arXiv source archive. Mathematical claims,
+  certificates, and verifier code are unchanged.
+
 ## Partial Lean formalization
 
 - Add proofs for the four-premise matrix implication, exact rational

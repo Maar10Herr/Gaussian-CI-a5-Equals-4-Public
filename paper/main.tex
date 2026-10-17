@@ -43,7 +43,7 @@
 \small Erasmus University Rotterdam\\
 \small Rotterdam, the Netherlands\\
 \small\href{https://orcid.org/0009-0005-8721-6588}{ORCID 0009-0005-8721-6588}}
-\date{\statusline\\16 October 2026}
+\date{\statusline\\17 October 2026}
 
 \begin{document}
 \maketitle
@@ -58,7 +58,7 @@ The upper bound is supplied by the five-variable instance of \v{S}ime\v{c}ek's i
 \[
  [12\mid3]\wedge[13\mid4]\wedge[14\mid5]\wedge[15\mid2]\Longrightarrow[12],
 \]
-together with an explicit 80-atom model of the complete marginal and conditional four-variable theory that violates the conclusion.  For the lower bound, all three-antecedent sets are classified under label permutations and duality.  Proper-support cases are reduced analytically, while the full-support cases are settled by rational Krawczyk certificates that provide positive-definite Gaussian counterexamples for every conclusion not forced by the four-local theory.  A deterministic standard-library verifier rebuilds the finite catalogues and orbit reductions and checks the countermodel, interval certificates, and coverage conditions.
+together with an explicit 80-atom model of the complete marginal and conditional four-variable theory that violates the conclusion.  For the lower bound, all three-antecedent sets are classified under label permutations and duality.  Proper-support cases are reduced analytically, while the full-support cases are settled by rational Krawczyk certificates that provide positive-definite Gaussian counterexamples for every conclusion not forced by the four-local theory.  An exact-arithmetic verifier rebuilds the finite catalogues and orbit reductions and checks the countermodel, interval certificates, and coverage conditions.
 \end{abstract}
 
 \section{Introduction}
@@ -212,13 +212,13 @@ Positive definiteness gives $|p_j|<1$ for every $j$, hence $a_1=0$.  This notati
 Analytic validity does not show that a rule escapes four-variable inference.  That claim is certified by a finite countermodel.
 
 \begin{proposition}[$\Tfour$ nonlocality]\label{prop:nonlocal}
-There exists an 80-bit model of all ten $\Tfour$ face constraints that contains the four premises of \eqref{eq:cycle5} and omits $[12]$.  Hence \eqref{eq:cycle5} is not a semantic consequence of $\Tfour$.
+There exists an 80-bit model of all ten $\Tfour$ face constraints that contains the four premises of \eqref{eq:cycle5} and omits the atom $[12]$.  Hence \eqref{eq:cycle5} is not a semantic consequence of $\Tfour$.
 \end{proposition}
 
 \begin{proof}
 Appendix~\ref{app:atoms} defines the bit order and prints the complete bitstring.  The verifier performs four checks.
 \begin{enumerate}
- \item Bits $1,10,20,25$, corresponding to $[12\mid3]$, $[13\mid4]$, $[14\mid5]$, and $[15\mid2]$, are one; bit $0$, corresponding to $[12]$, is zero.
+ \item Bits $1,10,20,25$, corresponding to the atoms $[12\mid3]$, $[13\mid4]$, $[14\mid5]$, and $[15\mid2]$, are one; bit $0$, corresponding to the atom $[12]$, is zero.
  \item Every instance of the four elementary gaussoid axiom schemes is evaluated directly on all ordered triples and background conditioning sets.
  \item For each omitted label, the 24 marginal bits are extracted in canonical four-atom order and matched against the 629-element catalogue.
  \item The same is done for the 24 atoms conditioning throughout on that label.
@@ -233,7 +233,7 @@ The four antecedents in \eqref{eq:cycle5} are premise-minimal.
 \end{corollary}
 
 \begin{proof}
-The full premise set does not force $[12]$ in $\Tfour$.  By monotonicity, no three-premise subset forces $[12]$ in $\Tfour$ either.  Proposition~\ref{prop:lower} implies that a Gaussian-valid deletion would be $\Tfour$-local, a contradiction.  Thus every deletion is Gaussian-invalid.  All four deletions canonicalize to premise orbit $(1,10,20)$, and certificate 272 covers the four mapped conclusions $0,8,16,24$.
+The full premise set does not force the atom $[12]$ in $\Tfour$.  By monotonicity, no three-premise subset forces it in $\Tfour$ either.  Proposition~\ref{prop:lower} implies that a Gaussian-valid deletion would be $\Tfour$-local, a contradiction.  Thus every deletion is Gaussian-invalid.  All four deletions canonicalize to the premise orbit represented by atom indices $(1,10,20)$, and certificate 272 covers the four mapped conclusion indices $0,8,16,24$.
 \end{proof}
 
 \section{The three-antecedent lower bound}\label{sec:lower}
@@ -319,13 +319,13 @@ The strict componentwise inclusion
 \end{equation}
 with nonsingular $C$ satisfies the standard Krawczyk existence-and-uniqueness criterion~\cite{Krawczyk1969,Rump2010}: $F$ has exactly one real zero in $X$.  Only existence is needed for the implication classification; uniqueness records the stronger certified conclusion.
 
-At that root, positive definiteness is certified by interval Sylvester tests.  The determinant of every leading principal block of the full interval matrix has a strictly positive lower endpoint.  For every conclusion index in the certificate's \code{covers} list, interval evaluation of its almost-principal minor excludes zero.  Therefore the root is an actual regular-Gaussian counterexample to every covered conclusion.
+At that root, positive definiteness follows from Sylvester's criterion.  The determinant of every leading principal block of the full interval matrix has a strictly positive lower endpoint.  For every conclusion index in the certificate's \code{covers} list, interval evaluation of its almost-principal minor excludes zero.  Therefore the root is an actual regular-Gaussian counterexample to every covered conclusion.
 
 One premise triple can have disconnected or algebraically distinct solution branches.  A single witness need not refute all nonforced conclusions.  The certificates use one box for 306 canonical full-support representatives and two boxes for the remaining 29, with the union of their cover sets providing the required coverage.  No claim requires all nonforced conclusions to fail at one Gaussian matrix.
 
 \subsection{Worked certificate}
 
-Certificate 272 treats the canonical premises
+Certificate 272 (zero-based record index) treats the canonical premises
 \[
  [12\mid3],\qquad[13\mid4],\qquad[14\mid5]
 \]
@@ -339,7 +339,7 @@ and is also the premise-minimality witness orbit from Corollary~\ref{cor:minimal
 \toprule
 Quantity & Certified interval or lower bound & Role\\
 \midrule
-$r_{12}$ & $[0.000286218259399,\ 0.000286418259400]$ & conclusion $[12]$ is false\\
+$r_{12}$ & $[0.000286218259399,\ 0.000286418259400]$ & $X_1\perp X_2$ is false\\
 $r_{13}$ & $[-0.00536186144355,\ -0.00536166144354]$ & unknown root coordinate\\
 $r_{14}$ & $[-0.0329011048000,\ -0.0329009047999]$ & unknown root coordinate\\
 Krawczyk interior margin & $\ge 9.99\times10^{-8}$ in each coordinate & strict inclusion\\
@@ -431,13 +431,14 @@ Theorem~\ref{thm:main} determines the least antecedent count but not the full se
  \item A classification of premise-minimal four-antecedent rules remains open.
  \item A structural proof of the three-antecedent lower bound could replace or compress the 364-certificate exhaustion.
  \item For $n>5$, one can define the threshold \(a_n\) relative to the complete $(n-1)$-local face theory.  \v{S}ime\v{c}ek's family supplies possible upper bounds, but nonlocality and lower bounds must be proved separately.
- \item The rational interval verification has not been formalized in a proof assistant.  A separate implementation would provide an additional check.
 \end{enumerate}
 
 The classification in this paper is limited to elementary CI atoms, singleton-conclusion Horn implications, regular positive-definite Gaussians, five labels, and at most three antecedents in the lower-bound search.  It does not cover singular Gaussians, disjunctive conclusions, or general semigraphoids.
 
 \paragraph{Reproducibility.}
-The certificates and independent verifier are available in the \href{https://github.com/Maar10Herr/Gaussian-CI-a5-Equals-4-Public/tree/v0.3.1}{versioned repository}.  From its root, \code{make verify-core} replays the finite enumeration, polynomial identity, countermodel, and rational interval certificates using only the Python standard library and no numerical discovery code.  Component commands and expected output are documented in the repository README.
+The certificates and independent verifier are available in the \href{https://github.com/Maar10Herr/Gaussian-CI-a5-Equals-4-Public/tree/v0.3.1}{versioned repository}.  From its root, \code{make verify-core} checks the finite enumeration, polynomial identity, countermodel, and rational interval certificates.
+
+\href{https://github.com/Maar10Herr/Gaussian-CI-a5-Equals-4-Public/tree/main/formalization}{Supplementary Lean proofs} establish the positive-definite matrix implication~\eqref{eq:cycle5}, its four-local nonderivability, and premise minimality.
 
 \paragraph{Acknowledgment.}
 I thank Tobias Boege for pointing out \v{S}ime\v{c}ek's earlier implication family and for his comments on terminology and presentation.  Generative-AI systems assisted with literature search, conjecture and proof development, computational implementation and checking, and manuscript drafting and revision.  The author directed the work and takes responsibility for the results, supporting evidence, and final text.
@@ -473,7 +474,7 @@ For certificate 272 the first rational unknown box is
  \left[\frac{1036593930957}{3621690430000000},
        \frac{1037318269043}{3621690430000000}\right],
 \]
-which excludes zero and therefore directly refutes $[12]$.  The remaining fractions and preconditioner are retained in the machine-readable certificate rather than typeset as several lines of large integers.
+which excludes zero and therefore refutes the marginal independence $X_1\perp X_2$.
 
 \bibliographystyle{plain}
 \bibliography{references}
