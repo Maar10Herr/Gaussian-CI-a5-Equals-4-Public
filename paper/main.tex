@@ -24,7 +24,7 @@
 \newcommand{\code}[1]{\texttt{#1}}
 \newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}
 
-\newcommand{\statusline}{Preprint, version 0.4}
+\newcommand{\statusline}{Preprint, version 0.5}
 
 \hypersetup{
   colorlinks=true,
@@ -43,22 +43,15 @@
 \small Erasmus University Rotterdam\\
 \small Rotterdam, the Netherlands\\
 \small\href{https://orcid.org/0009-0005-8721-6588}{ORCID 0009-0005-8721-6588}}
-\date{\statusline\\17 October 2026}
+\date{\statusline\\27 October 2026}
 
+\usepackage{xurl}
 \begin{document}
 \maketitle
 \vspace{-1.25em}
 
 \begin{abstract}
-We determine the minimum number of antecedents in a valid five-variable Gaussian conditional-independence implication that is not a consequence of the complete four-variable theory.  Call an elementary Horn rule four-local if it is a semantic consequence of requiring every marginal and conditional four-variable face to be regular-Gaussian realizable.  Let $a_5$ be the least number of distinct antecedents in a premise-minimal valid rule with full five-label support that is not four-local.  We prove
-\[
- a_5=4.
-\]
-Write $[ij\mid K]$ for $X_i\perp X_j\mid X_K$ and $[ij]$ for $X_i\perp X_j$.  For the upper bound, we use the five-variable instance of \v{S}ime\v{c}ek's implication,
-\[
- [12\mid3]\wedge[13\mid4]\wedge[14\mid5]\wedge[15\mid2]\Longrightarrow[12],
-\]
-together with an 80-atom model of the complete marginal and conditional four-variable theory that satisfies the premises and violates the conclusion.  For the lower bound, all three-antecedent sets are classified under label permutations and duality.  A positive-definite extension handles representatives with proper premise support.  For representatives with full premise support, rational Krawczyk certificates give positive-definite Gaussian counterexamples to every conclusion outside the computed sound closure.  An exact-arithmetic verifier checks the catalogues, orbit reductions, countermodel, interval certificates, and coverage.
+We determine the least number of antecedents in a premise-minimal, valid elementary Horn implication with full five-label support that is not a semantic consequence of the complete marginal-and-conditional four-variable theory $T_4$.  The implications have a single elementary conclusion, and $T_4$ requires each of the ten four-variable marginal and conditional faces to be regular-Gaussian realizable.  For regular positive-definite Gaussians, the sharp threshold is $a_5=4$.  The upper bound uses the five-variable instance of \v{S}ime\v{c}ek's implication family and an 80-atom $T_4$ model satisfying its premises and violating its conclusion.  The new contributions are this nonlocality certificate, an exhaustive three-antecedent lower bound, and the resulting premise minimality.  The lower bound classifies premise triples under permutations and duality.  A positive-definite extension handles representatives with proper premise support; for full-support representatives, rational Krawczyk certificates give Gaussian counterexamples to every conclusion outside a computed sound closure.  An exact-arithmetic verifier checks the finite catalogues, orbit reductions, countermodel, interval certificates, and coverage.
 \end{abstract}
 
 \section{Introduction}
@@ -76,7 +69,7 @@ Let $\Tfour$ denote the theory obtained by requiring all five marginal and all f
 
 The upper bound follows from a correlation proof of the five-variable instance of \v{S}ime\v{c}ek's implication.  An 80-bit $\Tfour$ model satisfies its four premises and violates its conclusion, proving that the rule is not four-local.  For the lower bound, all three-antecedent sets are reduced under permutations and duality.  A positive-definite extension proves the claim for proper-support representatives; rational interval certificates cover every conclusion outside the iterated $\Tfour$ closure for full-support representatives.
 
-The result concerns elementary singleton-conclusion Horn implications for regular positive-definite Gaussians.  It does not classify all four-antecedent rules or all five-variable Gaussian CI structures.  Sections~\ref{sec:setup}--\ref{sec:lower} define the problem and prove the two bounds.  Section~\ref{sec:verification} summarizes the computational proof, Section~\ref{sec:prior} places the threshold in the literature, and the appendices specify the countermodel, catalogue construction, and certificate data.
+The result concerns elementary singleton-conclusion Horn implications for regular positive-definite Gaussians.  It does not classify all four-antecedent rules or all five-variable Gaussian CI structures.  Sections~\ref{sec:setup}--\ref{sec:lower} define the problem and prove the two bounds.  Section~\ref{sec:verification} summarizes the computational proof and methods, Section~\ref{sec:prior} places the threshold in the literature, and the appendices specify the countermodel, catalogue construction, and certificate data.
 
 \section{Gaussian CI structures and the four-local theory}\label{sec:setup}
 
@@ -166,11 +159,11 @@ is regular-Gaussian valid, has support all five labels, and is not a consequence
 Every regular-Gaussian-valid elementary Horn implication on five labels with at most three distinct antecedents is a semantic consequence of $\Tfour$.
 \end{proposition}
 
-Proposition~\ref{prop:upper} gives $a_5\le4$.  Proposition~\ref{prop:lower} gives $a_5\ge4$.  Section~\ref{sec:nonlocal} and Corollary~\ref{cor:minimal} additionally prove that no premise in \eqref{eq:cycle5} can be deleted, satisfying the premise-minimality clause of Definition~\ref{def:a5}.
+Proposition~\ref{prop:upper} and Corollary~\ref{cor:minimal} give $a_5\le4$, including the premise-minimality clause of Definition~\ref{def:a5}.  Proposition~\ref{prop:lower} gives $a_5\ge4$.
 
 \section{The four-antecedent upper bound}\label{sec:upper}
 
-\v{S}ime\v{c}ek's Theorem~3.2 states a forbidden-minor result; the Gaussian part of its proof yields the regular-Gaussian implication family used here~\cite{Simecek2006}.  Its five-variable member is \eqref{eq:cycle5}.  The following direct calculation proves the Gaussian-validity part of Proposition~\ref{prop:upper}.
+The implication family used here is due to \v{S}ime\v{c}ek~\cite{Simecek2006}; its five-variable member is \eqref{eq:cycle5}.  The following direct calculation proves the Gaussian-validity part of Proposition~\ref{prop:upper}.
 
 Set
 \[
@@ -192,7 +185,7 @@ Since every $2\times2$ principal correlation submatrix is positive definite,
 \]
 The second factor on the right of \eqref{eq:telescoping} is therefore positive.  Under the four premises its left side vanishes, so $a=r_{12}=0$.  This proves the implication without division by a correlation.
 
-The same telescoping calculation gives the general regular-Gaussian implication in \v{S}ime\v{c}ek's argument.  For distinct labels $0,1,\ldots,k$, with $k\ge3$,
+The same telescoping calculation proves \v{S}ime\v{c}ek's general regular-Gaussian implication.  For distinct labels $0,1,\ldots,k$, with $k\ge3$,
 \begin{equation}\label{eq:family}
  [01\mid2]\wedge[02\mid3]\wedge\cdots\wedge[0,k-1\mid k]
  \wedge[0k\mid1]\quad\Longrightarrow\quad[01].
@@ -205,7 +198,7 @@ After multiplying the $j$th equation by $p_1\cdots p_{j-1}$ and summing, one obt
 \[
  a_1\bigl(1-p_1p_2\cdots p_k\bigr)=0.
 \]
-Positive definiteness gives $|p_j|<1$ for every $j$, hence $a_1=0$.  This notation has $k=n-1$ relative to \v{S}ime\v{c}ek's $J_n$.  The case $k=3$ is also rule (20) of Ln\v{e}ni\v{c}ka and Mat\'u\v{s}~\cite{LM2007}; the case $k=4$ gives Proposition~\ref{prop:upper}.
+Positive definiteness gives $|p_j|<1$ for every $j$, hence $a_1=0$.  The case $k=3$ is also rule (20) of Ln\v{e}ni\v{c}ka and Mat\'u\v{s}~\cite{LM2007}; the case $k=4$ gives Proposition~\ref{prop:upper}.
 
 \section{Nonlocality and premise minimality}\label{sec:nonlocal}
 
@@ -386,7 +379,7 @@ Boege's two-antecedental completeness theorem states that every inference form w
 
 Proposition~\ref{prop:coverage} handles the full-support representatives; Lemma~\ref{lem:extension} and the four-face argument handle the proper-support representatives.  Together with the low-antecedent theorem and symmetry reduction, these prove Proposition~\ref{prop:lower}, and with Proposition~\ref{prop:upper} prove Theorem~\ref{thm:main}.
 
-\section{Verification}\label{sec:verification}
+\section{Verification and computational methods}\label{sec:verification}
 
 The finite enumerations and rational interval inequalities in Table~\ref{tab:architecture} are checked in exact arithmetic.  Numerical search is used only to locate candidate boxes.
 
@@ -414,11 +407,15 @@ Premise minimality & four deletion mappings to certificate 272 & finite symmetry
 
 For each witness, the proof checks a nonsingular rational preconditioner, strict Krawczyk inclusion, positive leading-principal determinant enclosures, and nonzero conclusion-minor enclosures.  Coverage is checked against the complement of each computed closure.  Exhaustive enumeration of the CNF models gives 679 gaussoids; the five additional implication schemes retain 629, identified with the regular-Gaussian structures by the classification theorem in~\cite{LM2007}.
 
+\subsection{AI-assisted research and verification}
+
+OpenAI GPT-5.6 Sol, GPT-6 Astra, GPT-6.1 Sol, and GPT-6.1 Terra, and DeepSeek Flash and DeepSeek V4 Pro assisted with literature exploration, conjecture and proof development, computational implementation and checking, and manuscript drafting and revision.  DeepSeek Flash was used as an implementation subagent; GPT-6.1 Terra and GPT-6.1 Sol were also used in the preparation of this revision.  AI-generated suggestions are not mathematical evidence; the computational claims rely on the exact-arithmetic verifier and certificate data described above.
+
 \section{Related work}\label{sec:prior}
 
 Mat\'u\v{s} formulated Gaussian conditional independence through polynomial relations among covariance minors~\cite{Matus2005}.  Ln\v{e}ni\v{c}ka and Mat\'u\v{s} subsequently classified the four-variable regular-Gaussian structures and gave the five additional implication schemes used here to reconstruct $\Tfour^{(4)}$~\cite{LM2007}.
 
-\v{S}ime\v{c}ek's Theorem~3.2 constructs, for every $n\ge4$, a shared-endpoint family of independence models that is not Gaussian representable~\cite{Simecek2006}.  In the regular-Gaussian case, the proof yields \eqref{eq:family}; the $k=4$ instance is \eqref{eq:cycle5}.  The general family is therefore prior work.  The present argument adds the $\Tfour$ countermodel, premise minimality, and the exhaustive three-antecedent lower bound for its five-variable member.
+The general shared-endpoint implication family \eqref{eq:family} is due to \v{S}ime\v{c}ek~\cite{Simecek2006}; its $k=4$ instance is \eqref{eq:cycle5}.  The general family is therefore prior work.  The present argument adds the $\Tfour$ countermodel, premise minimality, and the exhaustive three-antecedent lower bound for its five-variable member.
 
 Sullivant established non-finite characterization by a distinct cyclic family~\cite{Sullivant2009}.  Its premise endpoints form a cycle, whereas the premises in \eqref{eq:family} share one endpoint; their endpoint graphs have different degree sequences and are not related by relabelling.  Sullivant's proof uses binomial primary decomposition and excludes components from the positive-definite cone by Hadamard-product arguments, while \eqref{eq:telescoping} gives a direct proof for the family needed here.
 
@@ -438,10 +435,10 @@ The classification in this paper is limited to elementary CI atoms, singleton-co
 \paragraph{Reproducibility.}
 The certificate data and exact-arithmetic verifier are available in software release \href{https://github.com/Maar10Herr/Gaussian-CI-a5-Equals-4-Public/tree/v0.3.1}{v0.3.1}.  From the repository root, \code{make verify-core} checks the finite enumeration, polynomial identity, countermodel, and rational interval certificates.
 
-\href{https://github.com/Maar10Herr/Gaussian-CI-a5-Equals-4-Public/tree/main/formalization}{Supplementary Lean proofs} formalize the positive-definite covariance-matrix implication~\eqref{eq:cycle5}, its four-local countermodel, and premise minimality.
+\href{https://github.com/Maar10Herr/Gaussian-CI-a5-Equals-4-Public/tree/af3848c44caabbdba891dab7efbdf9c7ee81d4c0/formalization}{Supplementary Lean proofs} establish the positive-definite covariance-matrix implication~\eqref{eq:cycle5}, a four-local countermodel, and premise minimality.
 
 \paragraph{Acknowledgment.}
-I thank Tobias Boege for pointing out \v{S}ime\v{c}ek's earlier implication family and for his comments on terminology and presentation.  Generative-AI systems assisted with literature search, conjecture and proof development, computational implementation and checking, and manuscript drafting and revision.  I take responsibility for the arguments, computations, and final text.
+I thank Tobias Boege for helpful correspondence on Gaussian conditional independence and the relevant literature.
 
 \appendix
 \section{Canonical atom order and countermodel}\label{app:atoms}

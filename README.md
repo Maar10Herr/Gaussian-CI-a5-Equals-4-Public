@@ -15,7 +15,7 @@ implications or all five-variable Gaussian CI structures.
 
 **[Read the paper](paper/Herrmann_Antecedent_Threshold_Gaussian_CI.pdf)** ·
 **[Inspect the certificates](certificates/)** ·
-**[Download TeX source](paper/gaussian-ci-a5-v0.4-arxiv-source.tar.gz)** ·
+**[Preprint LaTeX source, version 0.5](paper/main.tex)** ·
 **[Download verifier v0.3.1](https://github.com/Maar10Herr/Gaussian-CI-a5-Equals-4-Public/releases/tag/v0.3.1)**
 
 ## Result
@@ -37,11 +37,14 @@ The upper bound uses the five-variable member of Šimeček's implication family,
 \Longrightarrow [12],
 ```
 
-and an explicit 80-atom `T4` countermodel. The lower bound reduces all
+and an explicit 80-atom `T4` countermodel. The implication family is prior
+work; the new result is the four-local nonconsequence certificate and exhaustive
+three-antecedent lower bound, giving the threshold and premise minimality. The lower bound reduces all
 three-antecedent premise sets under label permutations and duality, handles
 proper-support representatives analytically, and supplies exact rational
 interval certificates for conclusions outside the four-local closure in the
-full-support cases.
+full-support cases. The constructive closure is sound for `T4`; the proof
+does not assume its general completeness.
 
 ## Partial Lean formalization
 

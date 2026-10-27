@@ -46,7 +46,8 @@ Franti\v{s}ek Mat\'u\v{s}.
 \newblock Conditional independences in {Gaussian} vectors and rings of
   polynomials.
 \newblock In {\em Conditionals, Information, and Inference}, volume 3301 of
-  {\em Lecture Notes in Computer Science}, pages 152--161. Springer, 2005.
+  {\em Lecture Notes in Computer Science}, pages 152--161, Berlin, Heidelberg,
+  2005. Springer.
 
 \bibitem{Rump2010}
 Siegfried~M. Rump.
@@ -65,7 +66,7 @@ Petr \v{S}ime\v{c}ek.
 \newblock Classes of {Gaussian}, discrete and binary representable independence
   models have no finite characterization.
 \newblock In M.~Hu\v{s}kov\'a and M.~Jan\v{z}ura, editors, {\em Proceedings of
-  Prague Stochastics}, volume 400, pages 622--631, Prague, 2006. Matfyzpress,
-  Charles University.
+  Prague Stochastics}, page 622 ff., Prague, 2006. Matfyzpress, Charles
+  University.
 
 \end{thebibliography}
